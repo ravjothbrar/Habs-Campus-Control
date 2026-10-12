@@ -504,11 +504,36 @@ body.scnmode .speed{opacity:.4;pointer-events:none}
 .ed-h{display:flex;align-items:center;gap:14px;margin-bottom:6px}.ed-h label{display:block;font:600 10px 'DM Sans';letter-spacing:.08em;text-transform:uppercase;color:#6b7a90}.ed-h b{font:600 16px 'Playfair Display',serif;color:#102850}
 .ed-cr{margin-left:auto;text-align:right}.ed-cr b{font:700 18px 'DM Mono',monospace;color:#8a5b10}
 .ed-row{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid rgba(16,40,80,.08)}.ed-row.lock{opacity:.6}
-.ed-row .eic{width:34px;height:34px}.ed-row .et b{font-size:12.5px}.ed-row .et small{font-size:11px}
+.ed-row .eic{width:34px;height:34px}.ed-row .et b{font-size:12.5px}.ed-row .et small{font-size:11px;font-family:'DM Sans',sans-serif}.ed-row .et small b{font-size:11px}
 .buy.ready{background:#27a45a;color:#fff;animation:pulse 1.4s infinite}
 .ed-note{margin:6px 0 0;font-size:11px;color:#6b7a90}
 body.scnmode .estdock{opacity:.35;pointer-events:none}
 @media (max-width:900px){.estdock{bottom:70px}}
+
+.ibtn.alert{box-shadow:0 0 0 3px rgba(194,69,59,.4);animation:pulse 1.6s infinite}
+/* ---- tiered upgrades ---- */
+.callout.warn{background:var(--warn-soft);color:var(--warn)}
+.tpips{display:inline-flex;gap:3px;margin-left:8px;vertical-align:1px}.tpips i{width:16px;height:6px;border-radius:3px;background:var(--line)}
+.tpips i.t1{background:#6c93bf}.tpips i.t2{background:#2b5aa0}.tpips i.t3{background:linear-gradient(90deg,#d7bd85,#b09458)}
+.est{border-left:4px solid transparent;padding-left:12px;margin-left:-4px}
+.est.t1{border-left-color:#6c93bf}.est.t2{border-left-color:#2b5aa0}.est.t3{border-left-color:#b09458;background:linear-gradient(90deg,rgba(176,148,88,.12),transparent 45%)}
+.est.urg{background:rgba(250,227,224,.32);border-radius:0 12px 12px 0;border-left-color:#c2453b}
+.est .tn{font-weight:700;color:#102850;font-size:11.5px;letter-spacing:.02em}
+.est .delta,.ed-row .et small{font-family:'DM Mono',monospace;font-size:11.5px;color:#102850}.et small i{font-style:normal;color:var(--ink-3);margin:0 3px}.et small b{display:inline;font:inherit;font-weight:700;color:#1f6a45}
+.est .eff.bad,.ed-row .et small{overflow-wrap:anywhere}.est .eff.bad{color:var(--bad);font-weight:700}
+.est.t1 .eic,.ed-row.t1 .eic{background:#e3edf8;color:#2b5aa0}.est.t2 .eic,.ed-row.t2 .eic{background:#d6e2f3;color:#102850}.est.t3 .eic,.ed-row.t3 .eic{background:#f3e9cf;color:#7a6330}
+.ed-row.urg{background:rgba(250,227,224,.4);border-radius:10px;padding-left:6px;padding-right:6px;box-shadow:inset 3px 0 0 #c2453b}
+.tb{margin-left:5px;font:700 9px 'DM Mono',monospace;padding:1px 5px;border-radius:5px;color:#fff;background:#6c93bf}.tb:empty{display:none}.tb.t2{background:#2b5aa0}.tb.t3{background:linear-gradient(135deg,#d7bd85,#b09458)}
+.medal{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:99px;font:700 11px 'DM Sans';background:var(--mute);color:var(--ink-2)}
+.medal.bronze{background:#f1dcc6;color:#8a4e1d}.medal.silver{background:#e3e8ef;color:#44546a}.medal.gold{background:#f6e7b8;color:#7a5a0e}.medal.platinum{background:linear-gradient(135deg,#dff0ff,#e9e2ff);color:#2b3e8a}
+.tierpop{position:fixed;left:50%;top:20%;transform:translateX(-50%);z-index:60;pointer-events:none;text-align:center;padding:18px 38px;border-radius:20px;color:#fff;animation:tierpop 3.2s cubic-bezier(.2,1.2,.3,1) forwards;box-shadow:0 20px 60px rgba(16,40,80,.35);max-width:calc(100% - 32px)}
+.tierpop small{display:block;font:600 12px 'DM Sans';letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.tierpop b{display:block;font:800 44px 'Playfair Display',serif;line-height:1.1;margin:4px 0}
+.tierpop span{display:block;font:600 15px 'DM Sans'}
+.tierpop i{display:block;font:500 12px 'DM Mono',monospace;font-style:normal;opacity:.9;margin-top:6px}
+.tierpop.t1{background:linear-gradient(135deg,#4f7fb0,#6c93bf)}.tierpop.t2{background:linear-gradient(135deg,#102850,#2b5aa0)}.tierpop.t3{background:linear-gradient(135deg,#8a6d2c,#d4b469 55%,#b09458)}
+@keyframes tierpop{0%{opacity:0;transform:translate(-50%,24px) scale(.7)}12%{opacity:1;transform:translate(-50%,0) scale(1.06)}20%{transform:translate(-50%,0) scale(1)}80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-30px)}}
+@media (prefers-reduced-motion:reduce){.tierpop{animation:none}}
 </style>
 </head>
 <body>
@@ -665,7 +690,7 @@ const ICON = {
 
 /* ---- save (this browser only) ---- */
 const SAVE_KEY = 'habs.campus.v2';
-function defaults() { return { v: 2, best: {}, credits: 0, xp: 0, up: { bays: 0, shuttle: 0, speed: 0, charge: 0, marsh: 0, cover: 0 }, plan: { park: 0, hub: 0, link: 0, parkOK: 0, servery: 0 }, enrol: 1, clubs: ['chess', 'orchestra', 'football', 'robotics', 'drama', 'cricket', 'hockey'], role: 'captain', rstat: {}, ach: {}, stats: { illegal: 0, days: 0, groups: 0, coaches: 0, mixed: 0, stars3: 0, scn: 0, found: 0 }, settings: { sound: true, music: true, vol: .7, labels: true, shadows: true }, tutorial: 0 }; }
+function defaults() { return { v: 2, best: {}, credits: 0, xp: 0, up: { bays: 0, shuttle: 0, speed: 0, charge: 0, marsh: 0, cover: 0 }, plan: { park: 0, hub: 0, link: 0, parkOK: 0, servery: 0, wpp: 0, wprep: 0, wmus: 0, wsix: 0 }, enrol: 1, clubs: ['chess', 'orchestra', 'football', 'robotics', 'drama', 'cricket', 'hockey'], role: 'captain', rstat: {}, ach: {}, stats: { illegal: 0, days: 0, groups: 0, coaches: 0, mixed: 0, stars3: 0, scn: 0, found: 0 }, settings: { sound: true, music: true, vol: .7, labels: true, shadows: true }, tutorial: 0 }; }
 function loadSave() {
   const d = defaults(); let s = null;
   try { s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch (e) { }
@@ -1252,13 +1277,13 @@ function logEv(txt, kind) { S.log.unshift({ t: S.t, txt, kind: kind || 'info' })
 const gapFor = s => ({ break: 2, board: 2, lunch: 4, club: 5, event: 7, tour: 4, assembly: 12, leave: 1 }[s.type] || 5);
 const isMixed = g => g.slots.some(s => s.mixed);
 const spd = () => WALK * wxMul();
-function wxMul() { const k = Math.min(1, save.up.cover / 2); return (1 - .14 * (S.wx.rain || 0) * (1 - .55 * k)) * (1 - .24 * (S.wx.snow || 0) * (1 - .5 * k)) * (S.iceHit ? .9 : 1); }
+function wxMul() { const k = Math.min(1, save.up.cover / 3); return (1 - .14 * (S.wx.rain || 0) * (1 - .55 * k)) * (1 - .24 * (S.wx.snow || 0) * (1 - .5 * k)) * (S.iceHit ? .9 : 1); }
 
 /* ---- bays ---- */
 function initBays() {
   BAYS = []; let n = 0;
   COACH.rows.forEach((z, r) => { COACH.bayX.forEach((x, c) => { BAYS.push({ i: n++, row: r, side: c, x, z: z, coach: null, block: 0, n: n }); }); });
-  const open = 6 + 2 * save.up.bays; BAYS.forEach(b => b.locked = b.i >= open);
+  const open = openBays(); BAYS.forEach(b => b.locked = b.i >= open);
 }
 const bayFree = b => !b.locked && !b.coach && S.t >= b.block;
 const freeBays = () => BAYS.filter(bayFree);
@@ -1298,7 +1323,7 @@ function walkStep(g, dt) {
 function arrive(g) {
   const k = g.target, L = LOC[k]; g.st = 'wait'; g.at = null; g.waitFrom = g.waitFrom || S.t; g.wantShuttle = false; tryEnter(g);
 }
-function capNow(k) { const b = BLD[k]; if (!b) return 1e9; return Math.round((b.cap + (b.extra || 0)) * (b.capMul || 1)); }
+function capNow(k) { const b = BLD[k]; if (!b) return 1e9; return Math.round((b.cap + (b.extra || 0)) * (b.capMul || 1) * wingMul(k)); }
 function tryEnter(g) {
   const k = g.target, slot = g.slots[g.si];
   if (BLD[k]) {
@@ -1339,11 +1364,16 @@ function scoreSlots(g) {
     if (s.type === 'tour') { S.tours++; if (ok) S.toursOn++; }
     if (s.mixed) { S.mixTot++; if (ok) S.mixOn++; }
     if (g.kind === 'visitor') { /* counted in tours */ } else { S.tot++; if (ok) S.on++; }
-    if (ok) { S.streak++; S.best = Math.max(S.best, S.streak); const pts = Math.round((s.mixed ? 150 : 100) * comboMult()); addScore(pts, g.x, g.z, '+' + pts); emit('good', { g }); }
-    else { if (S.streak >= 6) emit('streakLost', { n: S.streak }); S.streak = 0; addScore(-20, g.x, g.z, 'Late', true); emit('late', { g, slot: s }); }
+    const w = slotWeight(g, s);
+    if (ok) { S.streak++; S.best = Math.max(S.best, S.streak); S.basePts += w; const pts = Math.round(w * comboMult()); addScore(pts, g.x, g.z, '+' + pts); emit('good', { g }); }
+    else { if (S.streak >= 6) emit('streakLost', { n: S.streak }); S.streak = 0; const pen = Math.max(5, Math.round(w * .6)); addScore(-pen, g.x, g.z, 'Late', true); emit('late', { g, slot: s }); }
   }
 }
-const comboMult = () => 1 + Math.min(S.streak, 30) * .05;
+/* Points are earned per boy delivered on time, so a bigger school is worth more, and a late 40-boy group costs more than a late 12-boy one.
+   The flow multiplier builds slowly (x1.35 only after 60 on-time groups in a row) and any late group resets it. */
+const slotWeight = (g, s) => (g.mine ? 30 : g.size) * (s.mixed ? 1.5 : 1);
+const COMBO_AT = 60, COMBO_MAX = .35;
+const comboMult = () => 1 + Math.min(S.streak, COMBO_AT) / COMBO_AT * COMBO_MAX;
 function addScore(p, x, z, txt, bad, cat) { if (p > 0 && S.hands) p = Math.round(p * 1.25); S.score = Math.max(0, S.score + p); cat = cat || (p >= 0 ? 'lessons' : 'penalties'); S.led[cat] = (S.led[cat] || 0) + p; if (x != null && txt) emit('pop', { x, z, txt, bad: !!bad }); }
 
 function updGroup(g, dt) {
@@ -1420,7 +1450,7 @@ function updCoach(c, dt) {
       c.wait = Math.max(0, S.t - c.arrT - 1);
       if (!S.hands && !laneBlocked()) { const b = bestBay(c); if (b) dockCoach(c, b); }
       break; }
-    case 'dock': if (mv(c.dp, DOCK_V)) { c.st = c.am ? 'unload' : 'board'; c.dockAt = S.t; c.timer = c.am ? 1.3 + c.load / 40 : 0; c.ang = c.bay.side ? -Math.PI / 2 : Math.PI / 2; c.x = c.bay.x; c.z = c.bay.z; emit('docked', { c }); } break;
+    case 'dock': if (mv(c.dp, DOCK_V * (1 / bayTime() > 1 ? 1.3 : 1))) { c.st = c.am ? 'unload' : 'board'; c.dockAt = S.t; c.timer = c.am ? (1.3 + c.load / 40) * bayTime() : 0; c.ang = c.bay.side ? -Math.PI / 2 : Math.PI / 2; c.x = c.bay.x; c.z = c.bay.z; emit('docked', { c }); } break;
     case 'unload': c.timer -= dt; if (c.timer <= 0) { c.st = 'leave'; c.groups.forEach(g => { const L = { x: c.bay.x + (c.bay.side ? 6 : -6), z: c.bay.z }; spawnGroup(g, L.x, L.z, 'spawn'); emit('arrive', { g }); }); c.unloaded = S.t; startLeave(c); emit('unloaded', { c }); } break;
     case 'board': {
       const all = c.bgroups >= c.groups.length;
@@ -1447,10 +1477,10 @@ function marshalAt(node) { const i = S.marshals.indexOf(node); if (i >= 0) { S.m
 
 /* ---- density & alarms ---- */
 function updDensity() {
-  for (const e of GE) e.load = 0;
+  const mr2 = marshalR() ** 2; for (const e of GE) e.load = 0;
   for (const g of GROUPS) if (g.st === 'walk') { const e = g.pe[Math.max(0, g.pi - 1)] >= 0 ? g.pe[Math.max(0, g.pi - 1)] : g.pe[g.pi]; if (e != null && e >= 0) GE[e].load += g.size; }
   let hot = 0;
-  for (const e of GE) { let d = e.load / (Math.max(e.len, 14) * e.w); if (d > 0) { for (const m of S.marshals) { if ((GN[m].x - e.mx) ** 2 + (GN[m].z - e.mz) ** 2 < 2025) { d *= .5; break; } } } e.dens = d; if (d > 2.6) hot++; }
+  for (const e of GE) { let d = e.load / (Math.max(e.len, 14) * e.w); if (d > 0) { for (const m of S.marshals) { if ((GN[m].x - e.mx) ** 2 + (GN[m].z - e.mz) ** 2 < mr2) { d *= .5; break; } } } e.dens = d; if (d > 2.6) hot++; }
   S.hot = hot;
 }
 
@@ -1461,6 +1491,7 @@ function stepSim(dt) {
   for (const s of SHUTTLES) updShuttle(s, dt);
   for (const g of GROUPS) updGroup(g, dt);
   updDensity(); if (S.hot > 0) S.alarm += dt;
+  for (const g of GROUPS) if (g.blocked === 'full' && g.target && g.alive !== false && g.st !== 'in' && g.st !== 'walk' && g.st !== 'gone') { const k = g.target; S.bn[k] = (S.bn[k] || 0) + g.size * dt; if (S.bn[k] >= BN_MIN && !S.bnWarn[k]) { S.bnWarn[k] = 1; const id = Object.keys(WINGS).find(i => WINGS[i].includes(k)); if (id && estLevel(id) < 3) { toast('warn', nameOf(k) + ' is a bottleneck', 'Boys are queuing outside. ' + LINE[id].name + ' in Estates adds capacity.'); logEv(nameOf(k) + ' is full: boys are waiting outside', 'bad'); } } }
   for (const b of Object.values(BLD)) { if (b.closedUntil && b.closedUntil <= S.t && !b.openedLogged) { b.openedLogged = true; } }
   dayStep(dt);
   if (S.t >= T1 || (S.t > 1040 && GROUPS.every(g => g.st === 'done' || g.st === 'gone' || g.st === 'board') && COACHES.every(c => c.st === 'gone'))) endDay();
@@ -1552,19 +1583,24 @@ const DAYDEF = {
 };
 const DAY_ORDER = ['normal', 'open', 'sports', 'winter', 'speech'];
 const totalStars = () => Object.values(save.best).reduce((s, b) => s + (b.stars || 0), 0);
-const dayUnlocked = k => true; // everything unlocked for testing
+const dayUnlocked = k => totalStars() >= DAYDEF[k].unlock;
+/* Efficiency = score as a share of the day's potential (every boy on time, no streak bonus). */
+const MEDALS = [{ id: 'none', name: 'Unrated', min: 0, bonus: 0 }, { id: 'bronze', name: 'Bronze', min: .6, bonus: 5 }, { id: 'silver', name: 'Silver', min: .78, bonus: 15 }, { id: 'gold', name: 'Gold', min: .95, bonus: 30 }, { id: 'platinum', name: 'Platinum', min: 1.12, bonus: 50 }];
+const medalOf = e => MEDALS.reduce((m, x) => e >= x.min ? x : m, MEDALS[0]);
 function goalsFor() { const D_ = DAYDEF[S.kind]; const r = ROLES[S.role]; return [D_.goals[0], D_.goals[1], r.goal]; }
 
 /* ---- groups ---- */
 function makeGroups(kind) {
   const G = []; let id = 0, ci = 0; const en = save.enrol;
-  const add = (name, phase, size) => { const g = { id: id++, name, phase, size: Math.round(size * (kind === 'winter' ? .93 : 1)), ci: (ci++) % 6, st: 'away', slots: [], si: 0, x: 0, z: 0, kind: 'boys', alive: false, coach: null, arrive: null, entry: 'gate', inside: false, at: null, mixes: 0 }; g.color = HOUSE[g.ci].c; G.push(g); return g; };
+  const dm = demandMul(); const add = (name, phase, size) => { const g = { id: id++, name, phase, size: Math.round(size * (phase === 'sixth' ? 1 : dm) * (kind === 'winter' ? .93 : 1)), ci: (ci++) % 6, st: 'away', slots: [], si: 0, x: 0, z: 0, kind: 'boys', alive: false, coach: null, arrive: null, entry: 'gate', inside: false, at: null, mixes: 0 }; g.color = HOUSE[g.ci].c; G.push(g); return g; };
   ['Reception A', 'Reception B', 'Year 1 A', 'Year 1 B', 'Year 2 A', 'Year 2 B'].forEach(n => add(n, 'pp', 26));
   ['Year 3 A', 'Year 3 B', 'Year 4 A', 'Year 4 B', 'Year 5 A', 'Year 5 B', 'Year 6 A', 'Year 6 B'].forEach(n => add(n, 'prep', 28));
   for (const y of [7, 8, 9, 10, 11]) for (const l of 'ABCD') add('Year ' + y + ' ' + l, 'senior', 30);
   for (const y of ['Lower', 'Upper']) for (const l of 'ABCD') add(y + ' Sixth ' + l, 'sixth', 21 * en);
   return G;
 }
+/* Demand: the school grows every day. Everyone but the Sixth Form (which grows with `en` directly) scales more gently. */
+const demandMul = () => 1 + (save.enrol - 1) * .55;
 const baseOf = g => g.phase === 'pp' ? 'preprep' : g.phase === 'prep' ? 'prep' : g.phase === 'sixth' ? 'sixthf' : null;
 const hubOn = () => save.plan.hub > 0 && BLD.hub;
 function fillUse() { const U = {}; for (let i = 0; i < 12; i++) U[i] = {}; return U; }
@@ -1734,13 +1770,14 @@ function startDay(kind, role) {
   for (const k in SPOTS) { const s_ = SPOTS[k]; if (s_.cap0 == null) s_.cap0 = s_.cap; s_.cap = s_.cap0; s_.occ = 0; }
   if (kind === 'sports') { SPOTS.track.cap = 1400; SPOTS.croquet.cap = 1300; SPOTS.quad.cap = 800; } if (kind === 'speech') { SPOTS.croquet.cap = 1800; }
   Object.assign(S, { t: T0, running: false, over: false, started: true, score: 0, led: {}, streak: 0, best: 0, on: 0, tot: 0, mixOn: 0, mixTot: 0, onSite: 0, peakSite: 0, cwTot: 0, cwN: 0, cwLong: 0, alarm: 0, expired: 0, handled: 0, depLate: 0, depTot: 0, boarded: 0, strand: 0, ceremony: 0, ceremonyDone: false, tours: 0, toursOn: 0, jams: 0, hot: 0, shTrips: 0, inc: null, incQ: [], log: [], marshals: [], sel: null, selType: null, evac: null, report: null, wx: { rain: 0, snow: kind === 'winter' ? 1 : 0 }, incDone: 0, autoReroom: false, fx: [], hist: [],
-    ff: 0, curEntry: null, scn: null, scnCredits: 0, scnWin: 0, scnLose: 0, approvals: 0, joint: 0, parkOk: 0, parkTot: 0, fixtures: 0, trips: 0, clubBoys: 0, hands: false, me: null, found: 0, newClubs: [] });
+    basePts: 0, potential: 0, bn: {}, bnWarn: {}, ff: 0, curEntry: null, scn: null, scnCredits: 0, scnWin: 0, scnLose: 0, approvals: 0, joint: 0, parkOk: 0, parkTot: 0, fixtures: 0, trips: 0, clubBoys: 0, hands: false, me: null, found: 0, newClubs: [] });
   initBays(); initShuttles();
   const r = kind === 'open' ? genOpen() : kind === 'sports' ? genSports() : kind === 'speech' ? genSpeech() : genNormal({ kind, indoorPE: kind === 'winter', coachDelay: kind === 'winter' ? 24 : 0, amSpan: kind === 'winter' ? 2.2 : 1.7 });
   GROUPS = r.G; COACHES = r.C;
   if (role === 'student') { const me = GROUPS.find(g => g.phase === 'senior' && g.name.startsWith('Year 11')) || GROUPS[20]; me.name = 'You · Year 11'; me.size = 1; me.mine = true; me.color = '#e6bf2f'; S.me = me; }
   const inc = DAYDEF[kind].incidents.slice(); shuffle(inc); S.incPlan = inc.slice(0, 3).map(([type, a, b]) => ({ type, t: Math.round(rand(a, b)), done: false })).sort((a, b) => a.t - b.t);
   S.scnPlan = planScenarios(role);
+  S.potential = GROUPS.reduce((t, g) => t + g.slots.reduce((u, s) => u + (s.count ? slotWeight(g, s) : 0), 0), 0); S.potential += clamp(S.potential * .14, 500, 1800) + (kind === 'speech' ? 600 : 0);
   S.meta = { groups: GROUPS.length, boys: GROUPS.filter(g => g.kind === 'boys').reduce((s, g) => s + g.size, 0), coaches: COACHES.length };
   S.parkCap = parkCapacity(); S.parkDemand = parkDemand();
   emit('dayStarted', { kind });
@@ -1773,15 +1810,17 @@ function endDay() {
   const stars = res.filter(r => r.ok).length;
   if (S.expired === 0 && S.handled > 0) addScore(200, null, null, null, false, 'incidents');
   const strand = S.strand * -80; if (strand) addScore(strand, null, null, null, true, 'penalties');
+  save.lastBn = Object.assign({}, S.bn);
   const old = save.best[S.kind] || { score: 0, stars: 0 };
-  const credits = Math.floor(S.score / 900) + stars * 30 + (stars === 3 ? 25 : 0);
-  const xp = Math.floor(S.score / 160) + stars * 60 + 40 + S.scnWin * 25;
+  const eff = S.potential ? S.score / S.potential : 0, medal = medalOf(eff);
+  const credits = Math.floor(S.score / 130) + stars * 25 + (stars === 3 ? 20 : 0) + medal.bonus;
+  const xp = Math.floor(S.score / 20) + stars * 60 + 40 + S.scnWin * 25;
   const lvOld = levelOf(save.xp);
-  const rep = { kind: S.kind, role: S.role, goals: res, stars, score: Math.round(S.score), credits, xp, best: Math.max(old.score, Math.round(S.score)), newBest: S.score > old.score, newStars: Math.max(0, stars - (old.stars || 0)), lvOld, led: Object.assign({}, S.led), kp: k, bestStreak: S.best, handled: S.handled, expired: S.expired, boarded: S.boarded, scnWin: S.scnWin, scnCredits: S.scnCredits || 0, scnLose: S.scnLose, enrolFrom: save.enrol };
+  const rep = { kind: S.kind, role: S.role, goals: res, stars, score: Math.round(S.score), credits, xp, eff, medal: medal.id, potential: Math.round(S.potential), best: Math.max(old.score, Math.round(S.score)), newBest: S.score > old.score, newStars: Math.max(0, stars - (old.stars || 0)), lvOld, led: Object.assign({}, S.led), kp: k, bestStreak: S.best, handled: S.handled, expired: S.expired, boarded: S.boarded, scnWin: S.scnWin, scnCredits: S.scnCredits || 0, scnLose: S.scnLose, enrolFrom: save.enrol };
   save.best[S.kind] = { score: rep.best, stars: Math.max(old.stars || 0, stars) };
   const rs = save.rstat[S.role] || { days: 0, best: 0 }; rs.days++; rs.best = Math.max(rs.best, rep.score); save.rstat[S.role] = rs;
   save.credits += credits; save.xp += xp; save.stats.days++; save.stats.groups += GROUPS.length; save.stats.coaches += COACHES.length; save.stats.mixed += S.mixOn; save.stats.scn += S.scnWin; save.stats.found += S.found || 0; if (stars === 3) save.stats.stars3++;
-  save.enrol = Math.min(1.8, +(save.enrol + .04 + .02 * stars).toFixed(3)); rep.enrolTo = save.enrol;
+  save.enrol = Math.min(2.2, +(save.enrol + .04 + .02 * stars).toFixed(3)); rep.enrolTo = save.enrol; rep.bn = bottlenecks().slice(0, 3);
   rep.lvNew = levelOf(save.xp); writeSave(); S.report = rep; emit('end', { rep });
 }
 
@@ -2241,22 +2280,72 @@ function scnParkProp() { // the proposal
 }
 
 /* ---- 24_estates.js ---- */
-/* ================= ESTATES: the factory-style upgrade loop ================= */
+/* ================= ESTATES: the factory-style upgrade loop =================
+   The school grows every day, buildings fill up, boys queue outside, and credits buy the fix.
+   Every line has up to three tiers. Each tier changes what you SEE on the campus (more storeys, glass, solar,
+   gold trim), what it DOES (capacity, width, speed) and what it COSTS (about 2.2x per tier, like a tech tree). */
 const LOT = { x0: -295, x1: -205, z0: 38, z1: 78 }, HUBP = { x: 118, z: 40, w: 30, d: 20 };
+const TIERS = [null,
+  { n: 'Tier I', r: 'I', c: '#6c93bf', wall: '#eadfc8', roof: '#8b97a8', glass: '#a9c6e3', trim: '#7d8ba0', paving: '#d9d3c4' },
+  { n: 'Tier II', r: 'II', c: '#2b5aa0', wall: '#e8eef6', roof: '#26406b', glass: '#78acdf', trim: '#102850', paving: '#cbd3dd' },
+  { n: 'Tier III', r: 'III', c: '#b09458', wall: '#f7f2e6', roof: '#1c3358', glass: '#8fcaf5', trim: '#c9a85f', paving: '#e8e2d2' }];
+/* capacity lines: the four buildings that actually fill up as the school grows */
+const WINGS = { wpp: ['preprep'], wprep: ['prep'], wmus: ['seldon'], wsix: ['sixthf'], wmain: ['aske', 'taylor', 'hinton', 'bourne', 'mfl'] };
+const WING_MUL = [1, 1.3, 1.65, 2.1];
+const wingMul = k => { for (const id in WINGS) if (WINGS[id].includes(k)) return WING_MUL[save.plan[id] || 0] || 1; return 1; };
+const wingStat = (ks, l) => { const b = BLD[ks[0]]; return b ? (ks.length > 1 ? nameOf(ks[0]).replace(' Building', '') + ' ' : '') + Math.round(b.cap * WING_MUL[l]) + ' boys' + (ks.length > 1 ? ' +' + (ks.length - 1) + ' blocks' : '') : ''; };
+const wingLine = (id, name, cost, tn, desc, eff) => ({ id, store: 'plan', group: 'Capacity', name, max: 3, cost, ic: 'building', tn, desc, eff, wing: WINGS[id], stat: l => wingStat(WINGS[id], l) });
 const ESTATES = [
-  { id: 'park', name: 'Sixth Form car park', max: 3, cost: [150, 320, 560], ic: 'coach', desc: ['Next to the Astro pitches. Level 1: 12 bays.', 'Level 2: 24 bays.', 'Level 3: 32 bays with EV chargers.'], eff: 'More Sixth Formers drive in each year. More bays means fewer turned away at the permit desk.' },
-  { id: 'hub', name: 'Joint Sixth Form Hub', max: 2, cost: [420, 760], ic: 'people', desc: ['A shared teaching and social building at the boundary between the boys’ and girls’ schools. Mixed lessons can happen here with no long walk.', 'Level 2: a second floor and room for 160.'], eff: 'Mixed lessons use the Hub, so Sixth Formers do not need the shuttles as much.' },
-  { id: 'link', name: 'Cross-campus link path', max: 1, cost: [260], ic: 'map', desc: ['A direct paved path between the Sixth Form Centre and the Girls’ STEM building.'], eff: 'Shortens the walk across, so mixed lessons are easier to hit on time.' },
-  { id: 'servery', name: 'Bates servery extension', max: 2, cost: [180, 360], ic: 'fork', desc: ['A second serving line and more seats, so the lunch queue grows slower.', 'A third line and more seating.'], eff: 'Bates holds more boys and queues clear faster at lunch.' },
-  { id: 'bays', name: 'More coach bays', max: 2, cost: [120, 240], ic: 'coach', desc: ['Unlocks two more bays in the Coach Park each level.', 'Two more.'], eff: 'Coaches queue less on busy days.', up: 1 }
+  wingLine('wpp', 'Pre-Prep wing', [90, 210, 450], ['Extra storey', 'Two-storey wing', 'Glass learning hub'],
+    ['Adds a storey of classrooms on top of the Pre-Prep building.', 'Two storeys with glazed bands and a solar roof.', 'Three stepped storeys of glass, a roof garden and a gold crown.'], 'Pre-Prep fills up first as the school grows. Boys wait outside until there is room.'),
+  wingLine('wprep', 'Prep School wing', [100, 240, 500], ['Extra storey', 'Two-storey wing', 'Glass learning hub'],
+    ['Adds a storey of classrooms on top of the Prep School.', 'Two storeys with glazed bands and a solar roof.', 'Three stepped storeys of glass, a roof garden and a gold crown.'], 'The Prep School is packed for registration, lessons and lunch.'),
+  wingLine('wmus', 'Seldon Hall extension', [80, 200, 420], ['Rehearsal storey', 'Concert wing', 'Performance glasshouse'],
+    ['Adds a rehearsal storey above the Music Hall.', 'Two storeys of studios and a solar roof.', 'Three stepped storeys of glass and a roof garden.'], 'Every Prep class has music in the same period. The hall overflows.'),
+  wingLine('wmain', 'Teaching block storeys', [140, 320, 660], ['Added storey', 'Glazed upper floors', 'Glass learning towers'],
+    ['An extra storey on Aske, Taylor, Hinton, the Bourne and MFL.', 'Two storeys on each block, glazed bands and solar roofs.', 'Three stepped glass storeys on every block, with roof gardens.'], 'Lessons crowd into the main teaching blocks once the junior wings are fixed. The bottleneck moves.'),
+  wingLine('wsix', 'Sixth Form Centre extension', [100, 220, 480], ['Study storey', 'Common-room wing', 'Sixth Form glasshouse'],
+    ['Adds a study storey above the Sixth Form Centre.', 'Two storeys with a glazed common room and a solar roof.', 'Three stepped storeys of glass and a roof garden.'], 'Sixth Form groups grow fastest. Free periods spill outside.'),
+  { id: 'park', store: 'plan', group: 'Sixth Form', name: 'Sixth Form car park', max: 3, cost: [100, 230, 490], ic: 'coach', tn: ['Marked surface lot', 'Covered car park', 'Solar & EV hub'],
+    desc: ['A marked lot next to the Astro pitches with 12 more permit bays.', 'Two rows of bays under a covered canopy: 24 bays.', 'A solar canopy, EV chargers and lighting: 32 bays.'], eff: 'More Sixth Formers drive in each year. More bays means fewer turned away at the permit desk.', stat: l => (10 + [0, 12, 24, 32][l]) + ' spaces' },
+  { id: 'hub', store: 'plan', group: 'Sixth Form', name: 'Joint Sixth Form Hub', max: 3, cost: [290, 630, 1190], ic: 'people', tn: ['Hub pavilion', 'Three-storey Hub', 'Glass atrium Hub'],
+    desc: ['A glazed pavilion on the boys’ and girls’ boundary. Mixed lessons happen here with no long walk.', 'Three storeys with a roof terrace and solar array.', 'A five-storey glass atrium with a roof garden, plaza and gold crown.'], eff: 'Mixed lessons use the Hub, so Sixth Formers do not need the shuttles as much.', stat: l => ['No Hub', '90 seats', '160 seats', '240 seats'][l] },
+  { id: 'link', store: 'plan', group: 'Sixth Form', name: 'Cross-campus link', max: 3, cost: [180, 360, 700], ic: 'map', tn: ['Gravel path', 'Lit paved boulevard', 'Glazed arcade'],
+    desc: ['A direct path between the Sixth Form Centre and the Girls’ STEM building.', 'Paved, marked and lit, wide enough for two streams.', 'A glass-roofed arcade with gold trim. Rain-proof and wide.'], eff: 'Shortens the walk across and carries more boys at once.', stat: l => ['No link', '4.5 m wide', '6.5 m wide', '9 m wide'][l] },
+  { id: 'servery', store: 'plan', group: 'Campus', name: 'Bates servery extension', max: 3, cost: [120, 280, 570], ic: 'fork', tn: ['Second serving line', 'Glass dining atrium', 'Terrace & roof dining'],
+    desc: ['A second serving line and more seats, so the lunch queue grows slower.', 'A two-storey glass atrium and a third line.', 'Roof terrace dining, parasols and a fourth line.'], eff: 'Bates holds more boys and queues clear faster at lunch.', stat: l => 'Bates ' + (420 + [0, 70, 150, 260][l]) + ' boys' },
+  { id: 'bays', store: 'up', group: 'Transport', name: 'Coach park', max: 3, cost: [80, 210, 450], ic: 'coach', tn: ['Shelters + 2 bays', 'Canopy + 2 bays', 'Smart dispatch'],
+    desc: ['Two more bays open, with waiting shelters over every open bay.', 'The last two bays open under a full canopy with bay signs.', 'LED gantries and a glass-and-gold canopy: coaches dock and unload 40% faster.'], eff: 'Coaches queue less on busy days.', stat: l => ['6 bays', '8 bays', '10 bays', '10 bays · 40% faster'][l] },
+  { id: 'shuttle', store: 'up', group: 'Transport', name: 'EV shuttle fleet', max: 3, cost: [70, 160, 340], ic: 'bolt', tn: ['3rd shuttle', '4th shuttle', '5th shuttle'],
+    desc: ['One more shuttle for Sixth Form crossings.', 'A fourth shuttle joins the fleet.', 'A fifth shuttle, so crossings rarely wait.'], eff: 'More shuttles, shorter waits at the stations.', stat: l => (2 + l) + ' shuttles' },
+  { id: 'speed', store: 'up', group: 'Transport', name: 'Shuttle motors', max: 3, cost: [60, 150, 310], ic: 'up', tn: ['Sport motors', 'Twin motors', 'Hyper motors'],
+    desc: ['+20% shuttle speed. Blue livery.', '+40% shuttle speed. Gold livery and a roof light bar.', '+60% shuttle speed. Gold bodywork and underglow.'], eff: 'Shuttles finish each crossing sooner.', stat: l => '+' + l * 20 + '% speed' },
+  { id: 'charge', store: 'up', group: 'Transport', name: 'Fast chargers', max: 3, cost: [55, 125, 270], ic: 'bolt', tn: ['Charging posts', 'Canopy chargers', 'Solar charging hub'],
+    desc: ['A charging post at each shuttle station.', 'Two posts and a canopy at each station.', 'Three rapid posts under a solar canopy with a glow pad.'], eff: 'Shuttles top up their batteries much faster.', stat: l => '+' + Math.round(l * 60) + '% charge rate' },
+  { id: 'marsh', store: 'up', group: 'Campus', name: 'Marshal team', max: 3, cost: [50, 110, 240], ic: 'flag', tn: ['Extra marshal', 'Wider reach', 'Command team'],
+    desc: ['One more marshal, wearing a hi-vis banner.', 'Another marshal. Marshals reach further, with a pennant.', 'A third marshal and a wide reach, with a gold command flag.'], eff: 'Marshals halve crowding on the paths nearby.', stat: l => (2 + l) + ' marshals · ' + (45 + 9 * l) + ' m reach' },
+  { id: 'cover', store: 'up', group: 'Campus', name: 'Covered walkways', max: 3, cost: [75, 180, 390], ic: 'rain', tn: ['Steel canopies', 'Navy canopies + lights', 'Glass arcades'],
+    desc: ['Steel canopies over the ten busiest paths. Paths 20% wider.', 'Canopies over 22 paths with posts and lights. 45% wider.', 'Glass arcades with gold trim over 40 paths. 80% wider.'], eff: 'Rain and snow slow boys far less, and busy paths carry more.', stat: l => [0, 10, 22, 40][l] + ' paths · ' + ['—', '+20%', '+45%', '+80%'][l] + ' width' }
 ];
-let estGroup = null, estLink = null; const estEdge = {};
-function estLevel(id) { return id === 'bays' ? save.up.bays : save.plan[id]; }
+const LINE = {}; ESTATES.forEach(e => LINE[e.id] = e);
+const UPG = ESTATES.filter(e => e.store === 'up');
+const GROUPS_ORDER = ['Capacity', 'Sixth Form', 'Transport', 'Campus'];
+let estGroup = null; const estEdge = {}; const estAnims = [], estFx = [], estGlows = [];
+const estLevel = id => { const e = LINE[id]; return (e.store === 'up' ? save.up[id] : save.plan[id]) || 0; };
 const estLocked = e => e.id === 'park' && !save.plan.parkOK;
 const estLockText = () => 'Needs approval first. Parking is not allowed on site: after two illegal-parking cases the Sixth Form will petition (' + Math.min(2, save.stats.illegal) + '/2).';
-const campusLevel = () => 1 + ESTATES.reduce((a, e) => a + estLevel(e.id), 0) + Object.entries(save.up).filter(([k]) => k !== 'bays').reduce((a, [, v]) => a + v, 0);
-const estAnims = [];
-function estCost(e) { const l = estLevel(e.id); return l >= e.max ? null : e.cost[l]; }
+const campusLevel = () => 1 + ESTATES.reduce((a, e) => a + estLevel(e.id), 0);
+const estCost = e => { const l = estLevel(e.id); return l >= e.max ? null : e.cost[l]; };
+const openBays = () => 6 + 2 * Math.min(2, save.up.bays);
+const bayTime = () => save.up.bays >= 3 ? .6 : 1;
+const marshalR = () => 45 + 9 * save.up.marsh;
+const bldTier = k => { for (const id in WINGS) if (WINGS[id].includes(k)) return save.plan[id] || 0; return k === 'hub' ? save.plan.hub : k === 'bates' ? save.plan.servery : 0; };
+
+/* ---------- small geometry kit ---------- */
+const EM = {};
+const emat = (c, i) => EM['e' + c + i] || (EM['e' + c + i] = new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: i, roughness: .45 }));
+const gmat = (c, op) => EM['g' + c + op] || (EM['g' + c + op] = new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: .2, roughness: .1, metalness: .3, transparent: true, opacity: op || .8, side: THREE.DoubleSide, depthWrite: false }));
+const pmat = c => mat(c, { metalness: .45, roughness: .3 });
 function carMesh(x, z, rot, col, parent) { const g = new THREE.Group(); box(4.6, 1.3, 2.2, col, 0, 1.1, 0, g); box(2.4, 1, 1.9, '#cfe0ee', -.2, 2.1, 0, g); g.position.set(x, 0, z); g.rotation.y = rot; parent.add(g); return g; }
 function hideTrees(rects) {
   const c = world.userData.crowns, t = world.userData.trunks, c2 = world.userData.crowns2; if (!c) return; const d = new THREE.Object3D();
@@ -2265,66 +2354,311 @@ function hideTrees(rects) {
     d.rotation.set(0, 0, 0); d.position.set(tr[0], s * 1.35, tr[1]); inside ? d.scale.setScalar(.0001) : d.scale.set(s * .92, s * .82, s * .92); d.updateMatrix(); c.setMatrixAt(i, d.matrix); const a2 = i * 2.1; d.position.set(tr[0] + Math.cos(a2) * s * .5, s * 1.75, tr[1] + Math.sin(a2) * s * .5); inside ? d.scale.setScalar(.0001) : d.scale.set(s * .6, s * .55, s * .6); d.updateMatrix(); if (c2) c2.setMatrixAt(i, d.matrix); });
   t.instanceMatrix.needsUpdate = c.instanceMatrix.needsUpdate = true; if (c2) c2.instanceMatrix.needsUpdate = true;
 }
+function pip(p, x, z) { let c = false; for (let i = 0, j = p.length - 1; i < p.length; j = i++) { const a = p[i], b = p[j]; if ((a[1] > z) !== (b[1] > z) && x < (b[0] - a[0]) * (z - a[1]) / (b[1] - a[1]) + a[0]) c = !c; } return c; }
+function inBuilding(x, z) { for (const k in BLD) for (const r of BLD[k].recs) if (pip(r.p, x, z)) return true; return false; }
+function freeSpot(x0, z0) { // the nearest outdoor point around (x0, z0): chargers etc. must not end up inside a building
+  if (!inBuilding(x0, z0)) return [x0, z0]; for (const r of [4, 7, 10, 14]) for (const i of [2, 1, 3, 0, 4, 7, 5, 6]) { const a = i * Math.PI / 4, x = x0 + Math.cos(a) * r, z = z0 + Math.sin(a) * r; if (!inBuilding(x, z) && !inBuilding(x + 4, z) && !inBuilding(x, z + 4)) return [x, z]; } return [x0, z0];
+}
+function polyBounds(p) { let x0 = 1e9, x1 = -1e9, z0 = 1e9, z1 = -1e9; for (const q of p) { x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); z0 = Math.min(z0, q[1]); z1 = Math.max(z1, q[1]); } return { x0, x1, z0, z1 }; }
+function shrinkC(p, k) { let cx = 0, cz = 0; p.forEach(q => { cx += q[0]; cz += q[1]; }); cx /= p.length; cz /= p.length; return p.map(q => [cx + (q[0] - cx) * k, cz + (q[1] - cz) * k]); }
+const insetOr = (p, d, k) => { let r = null; try { r = insetPoly(p, d); } catch (e) { } return r && r.length >= 3 && polyArea(r) > 4 ? r : shrinkC(p, k || .85); };
+function extrudePoly(poly, y0, h, col) { // a prism over a footprint polygon, from y0 up h metres
+  const shape = new THREE.Shape(poly.map(q => new THREE.Vector2(q[0], -q[1]))); const g = new THREE.ExtrudeGeometry(shape, { depth: h, bevelEnabled: false }); g.rotateX(-Math.PI / 2);
+  const m = new THREE.Mesh(g, typeof col === 'string' ? mat(col) : col); m.position.y = y0; m.castShadow = m.receiveShadow = true; return m;
+}
+function bandMesh(poly, y0, y1, material, off) { // a vertical strip hugging the outside of a footprint (windows / glazing)
+  const n = poly.length, pos = [], nor = [], uv = []; off = off == null ? .1 : off; let acc = 0;
+  for (let i = 0; i < n; i++) { const a = poly[i], c = poly[(i + 1) % n], dx = c[0] - a[0], dz = c[1] - a[1], L = Math.hypot(dx, dz); if (L < .01) continue; const nx = dz / L, nz = -dx / L, u0 = acc / 6, u1 = (acc + L) / 6; acc += L;
+    const ax = a[0] + nx * off, az = a[1] + nz * off, cx = c[0] + nx * off, cz = c[1] + nz * off; const V = [[ax, y0, az, u0, 0], [cx, y0, cz, u1, 0], [cx, y1, cz, u1, 1], [ax, y1, az, u0, 1]];
+    for (const k of [0, 2, 1, 0, 3, 2]) { pos.push(V[k][0], V[k][1], V[k][2]); nor.push(nx, 0, nz); uv.push(V[k][3], V[k][4]); } }
+  return new THREE.Mesh(mkGeo(pos, nor, uv), material);
+}
+/* window textures: one 6 m cell of facade per tier, windows only (the wall colour comes from the prism behind) */
+const WINTEX = {};
+function winMat(tier) {
+  if (WINTEX[tier]) return WINTEX[tier];
+  const tex = canvasTex(256, 128, (g, W, H) => { g.clearRect(0, 0, W, H);
+    if (tier === 1) { for (const x of [28, 148]) { g.fillStyle = '#ffffff'; g.fillRect(x - 5, 26, 90, 76); g.fillStyle = '#3f5c7d'; g.fillRect(x, 31, 80, 66); g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(x, 31, 80, 18); g.fillStyle = '#ffffff'; g.fillRect(x + 38, 31, 4, 66); } }
+    else if (tier === 2) { g.fillStyle = '#102850'; g.fillRect(0, 22, W, 84); const gr = g.createLinearGradient(0, 28, 0, 100); gr.addColorStop(0, '#b4dbff'); gr.addColorStop(1, '#5f9fdc'); g.fillStyle = gr; for (let i = 0; i < 4; i++) g.fillRect(i * 64 + 4, 28, 56, 72); }
+    else { for (let i = 0; i < 4; i++) { const gr = g.createLinearGradient(0, 4, 0, 124); gr.addColorStop(0, '#d7f1ff'); gr.addColorStop(.5, '#7fcaf5'); gr.addColorStop(1, '#5aa8e0'); g.fillStyle = gr; g.fillRect(i * 64 + 3, 4, 58, 120); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(i * 64 + 8, 4, 8, 120); } g.fillStyle = '#c9a85f'; for (let i = 0; i <= 4; i++) g.fillRect(i * 64 - 1.5, 0, 3, H); }
+  }, true);
+  return WINTEX[tier] = new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: .05, roughness: tier === 1 ? .6 : .15, metalness: tier === 1 ? 0 : .35, emissive: '#7fb8e8', emissiveMap: tex, emissiveIntensity: tier === 1 ? .08 : tier === 2 ? .3 : .45, side: THREE.DoubleSide });
+}
+function solarRows(parent, poly, y, max) {
+  const bb = polyBounds(poly), inner = insetOr(poly, .9, .8); let n = 0;
+  for (let x = bb.x0 + 1.5; x < bb.x1 - 1 && n < max; x += 3.7) for (let z = bb.z0 + 1.5; z < bb.z1 - 1 && n < max; z += 3.2) {
+    if (!pip(inner, x, z) || !pip(inner, x + 3, z) || !pip(inner, x, z + 2.1) || !pip(inner, x + 3, z + 2.1)) continue;
+    const p = box(3, .14, 2.1, pmat('#1c3866'), x + 1.5, y + .6, z + 1.05, parent, false); p.rotation.x = -.3; box(.2, .6, .2, '#9aa4b4', x + 1.5, y + .3, z + 1.05, parent, false); n++;
+  }
+}
+function roofGarden(parent, poly, y, seed) {
+  const r = mulberry32(seed || 9), inner = insetOr(poly, 1.2, .8); parent.add(extrudePoly(inner, y, .45, '#5f9a58')); const bb = polyBounds(inner); let n = 0;
+  for (let t = 0; t < 40 && n < 6; t++) { const x = lerp(bb.x0, bb.x1, r()), z = lerp(bb.z0, bb.z1, r()); if (!pip(inner, x, z)) continue; n++; cyl(.16, .2, 1.4, '#7a5230', x, y + 1.1, z, parent, 6); const c = new THREE.Mesh(new THREE.SphereGeometry(1.15, 8, 6), mat('#4f8f4d')); c.position.set(x, y + 2.4, z); c.castShadow = true; parent.add(c); }
+}
+function beacon(parent, x, y, z, col) {
+  cyl(.16, .28, 6.5, '#aab4c2', x, y + 3.25, z, parent, 6); const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 1.2, roughness: .3 });
+  const s = new THREE.Mesh(new THREE.SphereGeometry(.75, 10, 8), m); s.position.set(x, y + 6.9, z); parent.add(s); estGlows.push(m);
+}
+function tierFlag(parent, x, y, z, tier) { // a pole + flag in the tier colour, with gold pips: readable from far away
+  const T = TIERS[tier]; cyl(.12, .14, 6.2, '#cfd6df', x, y + 3.1, z, parent, 6); box(2.7, 1.5, .12, T.c, x + 1.4, y + 5.3, z, parent, false);
+  for (let i = 0; i < 3; i++) box(.55, .3, .14, i < tier ? '#e6bf2f' : '#6b7a90', x + .65 + i * .8, y + 4.35, z, parent, false);
+}
+
+/* ---------- capacity wings: extra storeys on top of the real buildings, taller and richer each tier ---------- */
+function resetRoofs() { for (const k in BLD) for (const rec of BLD[k].recs) { if (rec.roof) rec.roof.visible = true; rec.grp.children.forEach(ch => { if (ch !== rec.walls && ch !== rec.roof && ch.position.y >= rec.H - .01 && ch.userData.hid) { ch.visible = true; ch.userData.hid = 0; } }); if (rec.outline) rec.outline.position.y = 0; } }
+function buildWing(parent, key, tier) {
+  const b = BLD[key]; if (!b || !b.recs.length) return []; const T = TIERS[tier], out = [], FH = 3.3, wallCol = ['#d9c59b', '#eef2f8', '#ffffff'][tier - 1];
+  const recs = b.recs.slice().sort((a, c) => polyArea(c.p) - polyArea(a.p)).slice(0, 2);
+  recs.forEach((rec, ri) => {
+    const poly = insetOr(rec.p, .12, .96); if (!poly || poly.length < 3) return;
+    rec.roof.visible = false; rec.grp.children.forEach(ch => { if (ch !== rec.walls && ch !== rec.roof && ch !== rec.outline && ch.position.y >= rec.H - .01 && ch.visible) { ch.visible = false; ch.userData.hid = 1; } }); // chimneys and roof clutter would poke through
+    const g = new THREE.Group(); g.position.y = rec.H; let y = 0, cur = poly;
+    for (let f = 0; f < tier; f++) {
+      g.add(extrudePoly(cur, y, FH, wallCol)); g.add(bandMesh(cur, y + .1, y + FH - .1, winMat(tier), .06));
+      const slab = insetOr(cur, -.3, 1.04); g.add(extrudePoly(slab, y + FH, .4, tier === 3 && f < tier - 1 ? '#c9a85f' : T.trim)); y += FH + .4;
+      if (f < tier - 1) cur = insetOr(cur, 1.1, .9); // each storey steps back a little
+    }
+    const top = cur, bb = polyBounds(top);
+    if (tier < 3) g.add(extrudePoly(insetOr(top, .4, .95), y - .03, .07, ['#9aa6b5', '#dfe6ee'][tier - 1])); // light roof plate inside the trim rim
+    if (tier === 1) { for (let i = 0; i < 3; i++) { const x = lerp(bb.x0, bb.x1, .25 + i * .25), z = (bb.z0 + bb.z1) / 2; if (pip(top, x, z)) box(2.2, 1.1, 1.6, '#aeb7c4', x, y + .55, z, g); } }
+    if (tier === 2) solarRows(g, top, y + .3, 16);
+    if (tier === 3) { roofGarden(g, top, y + .4, 31 + ri); solarRows(g, shrinkC(top, .55), y + .9, 8); g.add(extrudePoly(insetOr(top, -.5, 1.05), y - .05, .24, '#d4b469')); beacon(g, (bb.x0 + bb.x1) / 2, y + .4, (bb.z0 + bb.z1) / 2, '#e6bf2f'); }
+    const q = poly[0]; tierFlag(g, q[0], y, q[1], tier); if (rec.outline) rec.outline.position.y = rec.H + y - rec.topY + 1; g.userData.own = 1; parent.add(g); out.push(g);
+  });
+  return out;
+}
+
+/* ---------- Sixth Form car park ---------- */
+function buildPark(parent, tier) {
+  const g = new THREE.Group(), T = TIERS[tier], r = mulberry32(1357); const w = LOT.x1 - LOT.x0, d = LOT.z1 - LOT.z0, cx = (LOT.x0 + LOT.x1) / 2, cz = (LOT.z0 + LOT.z1) / 2;
+  box(w, .2, d, ['#6f7784', '#5f6a7b', '#4f5b72'][tier - 1], cx, .1, cz, g, false); box(w + 2, .3, .6, '#e6e8ec', cx, .2, LOT.z0 - 1, g, false); box(w + 2, .3, .6, '#e6e8ec', cx, .2, LOT.z1 + 1, g, false);
+  const rows = tier === 1 ? [LOT.z0 + 9] : [LOT.z0 + 9, LOT.z1 - 9]; const n = Math.floor((w - 18) / 5);
+  rows.forEach((z, ri) => { for (let i = 0; i < n; i++) { const x = LOT.x0 + 7 + i * 5; box(.2, .05, 4.6, tier === 3 ? '#9fe3b4' : '#ffffff', x - 2.5, .3, z, g, false); const lim = [.8, .8, 1][tier - 1] * n; if (i < lim && r() < .85) carMesh(x, z, Math.PI / 2, pick(scnCols), g); } });
+  const lamps = [5, 7, 10][tier - 1];
+  for (let i = 0; i < lamps; i++) { const x = LOT.x0 + 8 + i * ((w - 16) / (lamps - 1)); box(.3, 7, .3, '#4b525e', x, 3.6, cz, g); box(1.6, .4, 1, tier === 3 ? emat('#fff3c4', 1.4) : '#fff3c4', x, 7.2, cz, g, false); }
+  // booth + barrier
+  box(3.2, 3, 3.2, T.wall, LOT.x0 - 2, 1.6, LOT.z0 + 3, g); box(4, .4, 4, tier === 3 ? '#c9a85f' : T.trim, LOT.x0 - 2, 3.3, LOT.z0 + 3, g); box(.3, .3, 7, ['#e6bf2f', '#e6bf2f', '#c9a85f'][tier - 1], LOT.x0 - 2, 1.2, LOT.z0 + 8, g, false);
+  if (tier >= 2) { // covered canopy over each row, planters at the ends
+    rows.forEach(z => { for (let i = 0; i <= 8; i++) { const x = LOT.x0 + 8 + i * ((w - 16) / 8); box(.3, 4.4, .3, T.trim, x, 2.3, z - 2.8, g, false); box(.3, 4.4, .3, T.trim, x, 2.3, z + 2.8, g, false); } box(w - 12, .35, 6.4, tier === 3 ? '#16294a' : T.roof, cx, 4.6, z, g); box(w - 12, .25, .5, tier === 3 ? '#d4b469' : '#7098c0', cx, 4.45, z - 3.1, g, false); box(w - 12, .25, .5, tier === 3 ? '#d4b469' : '#7098c0', cx, 4.45, z + 3.1, g, false); });
+    for (const x of [LOT.x0 + 1, LOT.x1 - 1]) for (const z of [LOT.z0 + 2, LOT.z1 - 2]) { box(2, .9, 2, '#9aa1ab', x, .6, z, g); box(1.5, 1, 1.5, '#4f8f4d', x, 1.5, z, g, false); }
+  }
+  if (tier === 3) { // solar on the canopy, EV chargers, glowing guide lines
+    rows.forEach(z => { for (let i = 0; i < 17; i++) { const x = LOT.x0 + 9 + i * 4.8; const p = box(3.9, .12, 5.4, pmat('#17315c'), x, 4.95, z, g, false); p.rotation.z = .07; } });
+    for (let i = 0; i < n; i += 2) rows.forEach(z => { const x = LOT.x0 + 4.5 + i * 5; box(.5, 2.4, .5, '#27a45a', x, 1.4, z + 2.2 * (z === rows[0] ? -1 : 1), g, false); box(.35, .5, .6, emat('#59e08b', 1.6), x, 2.5, z + 2.2 * (z === rows[0] ? -1 : 1), g, false); });
+    box(w - 6, .06, .35, emat('#59c2ff', 1.2), cx, .27, cz, g, false); tierFlag(g, LOT.x1 + 2, 0, LOT.z0 + 3, 3);
+  } else tierFlag(g, LOT.x1 + 2, 0, LOT.z0 + 3, tier);
+  g.add(floorText('SIXTH FORM PARKING', cx, cz + (tier >= 2 ? 0 : 6), 40, 5, { color: 'rgba(255,255,255,.8)', size: 56 })); g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- Joint Sixth Form Hub: pavilion -> three storeys -> glass atrium ---------- */
 function buildHubMesh(parent, lv) {
-  const g = new THREE.Group(); const { x, z, w, d } = HUBP; const h = lv > 1 ? 11 : 7;
-  box(w, .6, d, '#d9d3c4', x, .3, z, g, false); box(w - 2, h, d - 2, '#dfe6ee', x, h / 2 + .6, z, g); box(w - 1, .7, d - 1, '#102850', x, h + 1, z, g);
-  for (let i = -2; i <= 2; i++) box(3.2, h - 1.8, .3, '#7fa1c6', x + i * 5.8, h / 2 + .6, z + d / 2 - .8, g, false);
-  box(8, 3.2, 4, '#b09458', x, 2.2, z + d / 2 + 1.6, g); box(9, .5, 5, '#102850', x, 4, z + d / 2 + 1.7, g);
-  if (lv > 1) box(w - 4, 1, d - 4, '#cfd8e2', x, h + 1.6, z, g);
-  for (let i = 0; i < 3; i++) { const c = cyl(1.6, 1.6, .9, '#3f7d49', x - 12 + i * 12, .8, z - d / 2 - 3, g, 10); }
+  const g = new THREE.Group(), { x, z, w, d } = HUBP, T = TIERS[lv]; const floors = [1, 3, 5][lv - 1], FH = 3.6, h = floors * FH;
+  box(w + 8, .55, d + 8, T.paving, x, .28, z + 2, g, false); box(w - 1, .5, d - 1, '#cfd8e2', x, .8, z, g, false);
+  let top = 1;
+  for (let f = 0; f < floors; f++) {
+    const inset = lv === 3 ? Math.max(0, f - 1) * 1.7 : 0, fw = w - 2 - inset * 2, fd = d - 2 - inset * 2, y0 = 1 + f * (FH + .35);
+    box(fw, FH, fd, T.wall, x, y0 + FH / 2, z, g);
+    const gl = lv === 1 ? mat('#7f95ad') : gmat(T.glass, lv === 3 ? .78 : .88), gh = FH - (lv === 1 ? 1.4 : .7);
+    box(fw - 1.6, gh, .3, gl, x, y0 + FH / 2, z + fd / 2 + .14, g, false); box(fw - 1.6, gh, .3, gl, x, y0 + FH / 2, z - fd / 2 - .14, g, false);
+    box(.3, gh, fd - 1.6, gl, x + fw / 2 + .14, y0 + FH / 2, z, g, false); box(.3, gh, fd - 1.6, gl, x - fw / 2 - .14, y0 + FH / 2, z, g, false);
+    box(fw + 1, .35, fd + 1, lv === 3 && f < floors - 1 ? '#c9a85f' : T.trim, x, y0 + FH + .17, z, g); top = y0 + FH + .35;
+  }
+  box(8, 3.2, 4, '#b09458', x, 2.4, z + d / 2 + 1.8, g); box(9, .5, 5, T.trim, x, 4.2, z + d / 2 + 1.9, g);
+  if (lv >= 2) { const rw = w - 2 - (lv === 3 ? 3.4 * 2 : 0), rd = d - 2 - (lv === 3 ? 3.4 * 2 : 0); box(rw, .9, .15, '#cfd8e2', x, top + .5, z + rd / 2, g, false); box(rw, .9, .15, '#cfd8e2', x, top + .5, z - rd / 2, g, false);
+    const poly = [[x - rw / 2, z + rd / 2], [x + rw / 2, z + rd / 2], [x + rw / 2, z - rd / 2], [x - rw / 2, z - rd / 2]]; if (lv === 2) solarRows(g, poly, top, 10); }
+  if (lv === 3) { // glass atrium spire, roof garden, plaza fountain, banner
+    box(10, 5.5, 8, gmat('#9fd6ff', .7), x, top + 2.75, z, g, false); box(10.6, .4, 8.6, '#d4b469', x, top + 5.6, z); box(11, .3, 9, '#d4b469', x, top - .1, z, false);
+    const gp = [[x - 11, z + 7], [x - 5.8, z + 7], [x - 5.8, z - 7], [x - 11, z - 7]]; roofGarden(g, gp, top, 5); const sp = [[x + 5.8, z + 7], [x + 11, z + 7], [x + 11, z - 7], [x + 5.8, z - 7]]; solarRows(g, sp, top, 6); beacon(g, x, top + 5.6, z, '#e6bf2f');
+    cyl(3.4, 3.6, .5, '#cfe3f3', x - 15, .8, z + d / 2 + 7, g, 24); cyl(2.9, 2.9, .3, emat('#6fcfff', .9), x - 15, 1.1, z + d / 2 + 7, g, 24); cyl(.5, .7, 2.4, '#e8e2d2', x - 15, 2, z + d / 2 + 7, g, 10);
+  }
+  for (let i = 0; i < (lv === 1 ? 3 : 5); i++) { cyl(1.6, 1.6, .9, '#3f7d49', x - 12 + i * (lv === 1 ? 12 : 6), .8, z - d / 2 - 3, g, 10); }
+  tierFlag(g, x + w / 2 + 3, 0, z + d / 2 + 2, lv); g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- cross-campus link: gravel path -> lit boulevard -> glazed arcade ---------- */
+function buildLink(parent, tier) {
+  const a = GN[estEdge.a], b = GN[estEdge.b], g = new THREE.Group(), T = TIERS[tier]; const L = Math.hypot(b.x - a.x, b.z - a.z) || 1, ux = (b.x - a.x) / L, uz = (b.z - a.z) / L, nx = -uz, nz = ux, ang = -Math.atan2(uz, ux);
+  const wid = [3.2, 5, 6.6][tier - 1];
+  g.add(new THREE.Mesh(ribbonGeo([[[a.x, a.z], [b.x, b.z]]], wid + 1.2, .14), mat(tier === 1 ? '#b8a77e' : tier === 2 ? '#e6e9ee' : '#c9a85f')));
+  g.add(new THREE.Mesh(ribbonGeo([[[a.x, a.z], [b.x, b.z]]], wid, .18 + tier * .02), mat(['#e9dcb9', '#4a5360', '#f1ece0'][tier - 1])));
+  const at = (t, off) => [a.x + ux * L * t + nx * off, a.z + uz * L * t + nz * off];
+  if (tier >= 2) { for (const s of [-1, 1]) { const p = at(.5, s * (wid / 2 - .35)), q = box(L, .05, .22, '#ffffff', p[0], .32, p[1], g, false); q.rotation.y = ang; }
+    const nl = Math.max(2, Math.floor(L / 13)); for (let i = 0; i <= nl; i++) for (const s of [-1, 1]) { const p = at(i / nl, s * (wid / 2 + .6)); box(.25, 5.2, .25, '#3a4350', p[0], 2.7, p[1], g, false); box(1.1, .35, .7, tier === 3 ? emat('#fff3c4', 1.5) : '#fff3c4', p[0], 5.4, p[1], g, false); } }
+  if (tier === 3) { // glazed arcade
+    const np = Math.max(3, Math.floor(L / 9)); for (let i = 0; i <= np; i++) for (const s of [-1, 1]) { const p = at(i / np, s * (wid / 2 + .1)); box(.4, 4.6, .4, '#c9a85f', p[0], 2.4, p[1], g, false); }
+    const m = at(.5, 0); const roof = box(L, .22, wid + 1.4, gmat('#a8dcff', .55), m[0], 4.8, m[1], g, false); roof.rotation.y = ang;
+    for (const s of [-1, 1]) { const p = at(.5, s * (wid / 2 + .65)); const gt = box(L, .3, .35, '#d4b469', p[0], 4.75, p[1], g, false); gt.rotation.y = ang; }
+    const cl = box(L - 2, .08, .3, emat('#fff3c4', 1.2), m[0], 4.5, m[1], g, false); cl.rotation.y = ang;
+  }
+  const f = at(.5, wid / 2 + 2.4); tierFlag(g, f[0], 0, f[1], tier); g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- Bates servery extension ---------- */
+function buildServery(parent, tier) {
+  const L = LOC.bates, b = BLD.bates; if (!L || !b) return null; let dx = L.x - b.cx, dz = L.z - b.cz; const dl = Math.hypot(dx, dz) || 1; dx /= dl; dz /= dl; const g = new THREE.Group(), T = TIERS[tier]; const x = L.x + dx * 6, z = L.z + dz * 6;
+  const fl = tier === 1 ? 1 : 2, fw = [20, 26, 30][tier - 1], fh = 4.4;
+  box(fw + 2, .3, 12, T.paving, x, .15, z, g, false);
+  for (let f = 0; f < fl; f++) { box(fw, fh, 8, T.wall, x, f * (fh + .3) + fh / 2 + .3, z, g); box(fw - 1.5, fh - 1.5, .3, tier === 1 ? mat('#7f95ad') : gmat(T.glass, .85), x, f * (fh + .3) + fh / 2 + .3, z + 4.15, g, false); box(fw + .8, .35, 8.8, T.trim, x, (f + 1) * (fh + .3) + .15, z); }
+  const top = fl * (fh + .3) + .3;
+  box(fw + 1, .5, 2.4, tier === 1 ? '#8a5a48' : tier === 2 ? '#26406b' : '#c9a85f', x, 4.2, z + 5, g, false); // awning
+  if (tier >= 2) { for (let i = 0; i < 4; i++) { const px = x - fw / 2 + 3 + i * (fw - 6) / 3; box(.9, .5, .9, '#6b4a2f', px, .55, z + 7.6, g, false); box(.1, 1.7, .1, '#aab4c2', px, 1.3, z + 7.6, g, false); } }
+  if (tier === 3) { for (let i = 0; i < 5; i++) { const px = x - fw / 2 + 3 + i * (fw - 6) / 4; const ug = new THREE.Mesh(new THREE.ConeGeometry(1.6, .7, 10), mat(i % 2 ? '#c9a85f' : '#f4efe2')); ug.position.set(px, top + 1.9, z); ug.castShadow = true; g.add(ug); cyl(.08, .08, 1.6, '#aab4c2', px, top + 1.1, z, g, 6); box(1.2, .5, 1.2, '#8a5a48', px, top + .55, z + 1.6, g, false); }
+    box(fw - 2, .9, .15, '#cfd8e2', x, top + .55, z + 3.9, g, false); cyl(.5, .6, 4, '#8a5a48', x + fw / 2 - 3, top + 2, z - 1.5, g, 8); }
+  tierFlag(g, x + fw / 2 + 2, 0, z + 5, tier); g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- coach park: shelters -> canopy + signs -> smart-dispatch gantries ---------- */
+function buildBays(parent, tier) {
+  const g = new THREE.Group(), T = TIERS[tier], open = openBays(), cx = COACH.laneX; const rows = COACH.rows;
+  BAYS.forEach(b => { if (b.i >= open) return; const sx = b.side ? -1 : 1; // side 0 = west bay (x -50), side 1 = east bay (x -28)
+    const x = b.x, z = b.z; const roofCol = tier === 3 ? gmat('#8fd0ff', .8) : tier === 2 ? mat(T.roof) : mat(T.roof);
+    for (const px of [x - 6, x + 6]) for (const pz of [z - 2.6, z + 2.6]) box(.28, 4.7, .28, tier === 3 ? '#c9a85f' : T.trim, px, 2.4, pz, g, false);
+    box(14, .3, 5.8, roofCol, x, 4.85, z, g, tier !== 3); if (tier >= 2) { box(14, .3, .4, tier === 3 ? '#d4b469' : '#7098c0', x, 4.7, z - 2.9, g, false); box(14, .3, .4, tier === 3 ? '#d4b469' : '#7098c0', x, 4.7, z + 2.9, g, false); }
+    if (tier >= 2) { box(.18, 3.2, .18, '#cfd6df', x + sx * 7.4, 1.6, z + 2.4, g, false); box(1.4, 1.1, .12, emat('#3b82c4', .9), x + sx * 7.4, 3.2, z + 2.4, g, false); }
+  });
+  if (tier === 3) { rows.forEach((z, ri) => { if (ri * 2 >= open) return; for (const px of [-62, -16]) box(.5, 7, .5, '#c9a85f', px, 3.5, z, g, false); box(48, .6, .9, '#102850', cx, 7.1, z, g); box(46, .2, .5, emat('#59e08b', 1.5), cx, 6.7, z, g, false); }); }
+  tierFlag(g, cx + 25, 0, rows[rows.length - 1] - 8, tier); g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- shuttle chargers: post -> canopy -> solar charging hub, at both stations ---------- */
+function buildChargers(parent, tier) {
+  const g = new THREE.Group(), T = TIERS[tier];
+  [LOC.sixthf, LOC.g_stem].forEach((L, si) => { if (!L) return; const [x, z] = freeSpot(GN[L.node].x + 3, GN[L.node].z + 3), w = 4 + tier * 4;
+    box(w + 2, .14, 9, tier === 1 ? '#8b97a8' : tier === 2 ? '#26406b' : '#16294a', x + (w - 4) / 2, .2, z, g, false); box(w + 2.6, .1, .5, tier === 3 ? '#d4b469' : '#ffffff', x + (w - 4) / 2, .26, z + 4.6, g, false);
+    for (let i = 0; i < tier; i++) { const px = x + i * 4; box(1.3, 3.6, 1, '#e9eef5', px, 1.9, z, g); box(1, .9, 1.04, emat(tier === 3 ? '#59e08b' : '#6fa8ff', 1.5), px, 3.4, z, g, false); box(.2, .2, 1, '#27a45a', px, 1.3, z + .8, g, false); }
+    for (const px of [x - 1.6, x + w - 2.4]) { box(.3, 7.5, .3, '#3a4350', px, 3.8, z + 3.6, g, false); box(1.6, .5, 1, emat(tier === 3 ? '#fff3c4' : '#9fd0ff', 1.5), px, 7.6, z + 3.6, g, false); }
+    if (tier >= 2) { for (const px of [x - 1.4, x + (tier - 1) * 4 + 1.4]) box(.35, 5, .35, T.trim, px, 2.6, z - 2, g, false); box((tier - 1) * 4 + 4.4, .4, 5.4, tier === 3 ? '#16294a' : T.roof, x + (tier - 1) * 2, 5.2, z - .2, g); if (tier === 3) for (let i = 0; i < tier * 2; i++) { const p = box(1.8, .12, 4.6, pmat('#17315c'), x - .6 + i * 2, 5.55, z - .2, g, false); p.rotation.z = .12; } }
+    if (tier === 3) box(w + 1, .06, 7, emat('#4ac1ff', .8), x + (w - 4) / 2, .3, z, g, false);
+    if (si === 0) tierFlag(g, x - 3, 0, z - 3, tier); });
   g.userData.own = 1; parent.add(g); return g;
 }
+
+/* ---------- covered walkways over the busiest paths ---------- */
+let _covOrder = null;
+function coverOrder() { // edges ranked by how much of the school's walking runs over them
+  if (_covOrder) return _covOrder; const okc = ['footway', 'path', 'pedestrian', 'cycleway', 'bridleway'];
+  const keys = Object.keys(BLD).filter(k => BLD[k].recs.length && BLD[k].side === 'b' && BLD[k].cap >= 120 && LOC[k]); const use = new Map();
+  for (let i = 0; i < keys.length; i++) for (let j = i + 1; j < keys.length; j++) { if (LOC[keys[i]].node === LOC[keys[j]].node) continue; const r = routeNodes(LOC[keys[i]].node, LOC[keys[j]].node); for (const e of r.edges) if (GE[e] && okc.includes(GE[e].cls) && GE[e].len > 5) use.set(e, (use.get(e) || 0) + BLD[keys[i]].cap + BLD[keys[j]].cap); }
+  return _covOrder = [...use.entries()].sort((a, b) => b[1] - a[1]).map(([e]) => e);
+}
+const COVER_N = [0, 10, 22, 40], COVER_W = [1, 1.2, 1.45, 1.8];
+function buildCover(parent, tier) {
+  const g = new THREE.Group(), T = TIERS[tier], edges = coverOrder().slice(0, COVER_N[tier]); const lines = [], posts = [], lights = [];
+  edges.forEach(ei => { const e = GE[ei], a = GN[e.a], b = GN[e.b]; lines.push([[a.x, a.z], [b.x, b.z]]); const L = Math.hypot(b.x - a.x, b.z - a.z), ux = (b.x - a.x) / L, uz = (b.z - a.z) / L, nx = -uz, nz = ux, hw = (e.w0 || e.w) / 2 + .7; const nP = Math.max(1, Math.floor(L / 12));
+    for (let i = 0; i <= nP; i++) for (const s of [-1, 1]) posts.push([a.x + ux * L * i / nP + nx * hw * s, a.z + uz * L * i / nP + nz * hw * s]); for (let i = 0; i < nP; i++) lights.push([a.x + ux * L * (i + .5) / nP, a.z + uz * L * (i + .5) / nP]); });
+  if (!lines.length) return g;
+  const roofMat = tier === 3 ? gmat('#5fc8ff', .8) : tier === 2 ? mat('#26406b') : mat('#6b7686'); const rw = 5.6;
+  const roof = new THREE.Mesh(ribbonGeo(lines, rw, 4.7), roofMat); roof.castShadow = tier !== 3; g.add(roof);
+  if (tier >= 2) { const trim = new THREE.Mesh(ribbonGeo(lines, rw + 1.3, 4.6), mat(tier === 3 ? '#d4b469' : '#7098c0')); g.add(trim); }
+  const pg = new THREE.BoxGeometry(.3, 4.7, .3), im = new THREE.InstancedMesh(pg, mat(tier === 3 ? '#d4b469' : tier === 2 ? '#102850' : '#e6bf2f'), posts.length); const o = new THREE.Object3D();
+  posts.forEach((p, i) => { o.position.set(p[0], 2.35, p[1]); o.updateMatrix(); im.setMatrixAt(i, o.matrix); }); im.castShadow = true; g.add(im);
+  if (tier >= 2) { const lm = new THREE.InstancedMesh(new THREE.BoxGeometry(1.2, .2, .5), emat('#fff3c4', tier === 3 ? 1.6 : .9), lights.length); lights.forEach((p, i) => { o.position.set(p[0], 4.45, p[1]); o.updateMatrix(); lm.setMatrixAt(i, o.matrix); }); g.add(lm); }
+  g.userData.own = 1; parent.add(g); return g;
+}
+
+/* ---------- assemble the estate for the current save ---------- */
+function disposeTree(root) { const shared = new Set(Object.values(GEOS)); root.traverse(o => { if (o.geometry && !shared.has(o.geometry)) o.geometry.dispose(); }); }
 function applyEstates(animId) {
   const parts = {};
-  if (estGroup) { world.remove(estGroup); estGroup = null; }
+  if (estGroup) { disposeTree(estGroup); world.remove(estGroup); estGroup = null; } estGlows.length = 0; resetRoofs();
   estGroup = new THREE.Group(); world.add(estGroup); const pl = save.plan;
+  GE.forEach(e => { if (e.w0 == null) e.w0 = e.w; });
   // temporary Sixth Form lot (before the car park is built): scattered cars
   if (window.__tmpLot) { world.remove(window.__tmpLot); window.__tmpLot = null; }
   if (pl.park === 0) { const t = new THREE.Group(); const r = mulberry32(55); for (let i = 0; i < 26; i++) { const row = i % 2, x = -388 + Math.floor(i / 2) * 6.5 + r() * 1.5; carMesh(x, row ? 4 : -22, Math.PI / 2, pick(scnCols), t); } t.userData.own = 1; world.add(t); window.__tmpLot = t; }
-  // Sixth Form car park
-  hideTrees([].concat(pl.park > 0 ? [LOT] : [], pl.hub > 0 ? [{ x0: HUBP.x - HUBP.w / 2 - 2, x1: HUBP.x + HUBP.w / 2 + 2, z0: HUBP.z - HUBP.d / 2 - 2, z1: HUBP.z + HUBP.d / 2 + 8 }] : []));
-  if (pl.park > 0) {
-    const g = new THREE.Group(); const w = LOT.x1 - LOT.x0, d = LOT.z1 - LOT.z0, cx = (LOT.x0 + LOT.x1) / 2, cz = (LOT.z0 + LOT.z1) / 2;
-    box(w, .2, d, '#9aa1ab', cx, .1, cz, g, false); box(w + 2, .3, .6, '#e6e8ec', cx, .2, LOT.z0 - 1, g, false); box(w + 2, .3, .6, '#e6e8ec', cx, .2, LOT.z1 + 1, g, false);
-    const rows = pl.park === 1 ? [LOT.z0 + 9] : [LOT.z0 + 9, LOT.z1 - 9]; const n = Math.floor((w - 18) / 5);
-    rows.forEach((z, r) => { for (let i = 0; i < n; i++) { const x = LOT.x0 + 7 + i * 5; box(.2, .05, 4.6, '#ffffff', x - 2.5, .3, z, g, false); const lim = pl.park === 2 ? n * .6 : pl.park === 3 ? n : n * .7; if (i < lim && RNG() < .7) carMesh(x, z, Math.PI / 2, pick(scnCols), g); } });
-    if (pl.park >= 3) for (let i = 0; i < 6; i++) { box(.5, 2.4, .5, '#27a45a', LOT.x0 + 12 + i * 12, 1.4, LOT.z0 + 4, g); }
-    for (let i = 0; i < 5; i++) { box(.3, 7, .3, '#4b525e', LOT.x0 + 8 + i * 19, 3.6, cz, g); box(1.6, .4, 1, '#fff3c4', LOT.x0 + 8 + i * 19, 7.2, cz, g, false); }
-    floorText('SIXTH FORM PARKING', cx, cz, 40, 5, { color: 'rgba(255,255,255,.8)', size: 56 }); g.userData.own = 1; estGroup.add(g); parts.park = g;
-  }
-  // Joint Hub
-  if (pl.hub > 0) { parts.hub = buildHubMesh(estGroup, pl.hub); BLD.hub = { key: 'hub', recs: [], name: 'Joint Sixth Form Hub', cap: pl.hub > 1 ? 160 : 90, side: 'b', use: 'sixth', x: HUBP.x, z: HUBP.z, cx: HUBP.x, cz: HUBP.z, area: HUBP.w * HUBP.d, occ: 0, closedUntil: 0, sel: false };
-    LOC.hub = { key: 'hub', x: HUBP.x, z: HUBP.z + HUBP.d / 2 + 4, node: nearNode(HUBP.x, HUBP.z + HUBP.d / 2 + 4), kind: 'b' }; floorText('JOINT SIXTH FORM HUB', HUBP.x, HUBP.z + HUBP.d / 2 + 9, 40, 5, { size: 52 }); }
+  hideTrees([].concat(pl.park > 0 ? [LOT] : [], pl.hub > 0 ? [{ x0: HUBP.x - HUBP.w / 2 - 6, x1: HUBP.x + HUBP.w / 2 + 6, z0: HUBP.z - HUBP.d / 2 - 4, z1: HUBP.z + HUBP.d / 2 + 14 }] : []));
+  if (pl.park > 0) parts.park = buildPark(estGroup, pl.park);
+  // Joint Hub (kept as one record so groups inside are not lost when you upgrade mid-day)
+  if (pl.hub > 0) { parts.hub = buildHubMesh(estGroup, pl.hub); const cap = [0, 90, 160, 240][pl.hub];
+    if (BLD.hub) BLD.hub.cap = cap; else BLD.hub = { key: 'hub', recs: [], name: 'Joint Sixth Form Hub', cap, side: 'b', use: 'sixth', x: HUBP.x, z: HUBP.z, cx: HUBP.x, cz: HUBP.z, area: HUBP.w * HUBP.d, occ: 0, closedUntil: 0, sel: false };
+    LOC.hub = { key: 'hub', x: HUBP.x, z: HUBP.z + HUBP.d / 2 + 4, node: nearNode(HUBP.x, HUBP.z + HUBP.d / 2 + 4), kind: 'b' }; estGroup.add(floorText('JOINT SIXTH FORM HUB', HUBP.x, HUBP.z + HUBP.d / 2 + 9, 40, 5, { size: 52 })); }
   else { delete BLD.hub; delete LOC.hub; }
-  // Link path (graph edge + ribbon)
-  if (pl.link > 0 && !estEdge.on) { const a = nearNode(LOC.sixthf.x, LOC.sixthf.z), b = nearNode(LOC.g_stem.x, LOC.g_stem.z); if (a !== b) { const len = Math.hypot(GN[a].x - GN[b].x, GN[a].z - GN[b].z); const e = { a, b, len, cls: 'footway', w: 4.5, load: 0, dens: 0, mx: (GN[a].x + GN[b].x) / 2, mz: (GN[a].z + GN[b].z) / 2 }; GE.push(e); const i = GE.length - 1; GN[a].adj.push([b, i]); GN[b].adj.push([a, i]); estEdge.on = true; estEdge.i = i; for (const k in TREES) delete TREES[k];
-    estLink = new THREE.Mesh(ribbonGeo([[[GN[a].x, GN[a].z], [GN[b].x, GN[b].z]]], 3.2, .16), new THREE.MeshStandardMaterial({ color: '#e9dcb9', roughness: .9 })); world.add(estLink); } }
-  else if (pl.link === 0 && estEdge.on) { GE[estEdge.i].len = 1e6; estEdge.on = false; if (estLink) world.remove(estLink); for (const k in TREES) delete TREES[k]; }
-  // Bates servery extension
-  if (BLD.bates) { BLD.bates.extra = [0, 40, 90][pl.servery] || 0; if (pl.servery > 0) { const L = LOC.bates, b = BLD.bates; let dx = L.x - b.cx, dz = L.z - b.cz; const dl = Math.hypot(dx, dz) || 1; dx /= dl; dz /= dl; const g = new THREE.Group(); const x = L.x + dx * 6, z = L.z + dz * 6; box(14 + pl.servery * 6, 4.4, 8, '#c9b9a3', x, 2.2, z, g); box(15 + pl.servery * 6, .6, 9, '#8a5a48', x, 4.7, z, g); for (let i = 0; i < pl.servery + 1; i++) box(2.6, 2.2, .2, '#7fa1c6', x - 4 + i * 4.5, 2.4, z + 4.1, g, false); g.userData.own = 1; estGroup.add(g); parts.servery = g; } }
-  if (animId && parts[animId]) { const g = parts[animId]; g.scale.y = .01; estAnims.push({ g, t: 0 }); const bb = new THREE.Box3().setFromObject(g); estDust((bb.min.x + bb.max.x) / 2, (bb.min.z + bb.max.z) / 2, Math.max(bb.max.x - bb.min.x, 20) / 2); view.gx = (bb.min.x + bb.max.x) / 2; view.gz = (bb.min.z + bb.max.z) / 2; view.gzoom = Math.max(view.gzoom, 2.2); }
+  // cross-campus link: a graph edge (created once) whose width and look follow the tier
+  if (pl.link > 0 && !estEdge.on) { const a = nearNode(LOC.sixthf.x, LOC.sixthf.z), b = nearNode(LOC.g_stem.x, LOC.g_stem.z); if (a !== b) { const len = Math.hypot(GN[a].x - GN[b].x, GN[a].z - GN[b].z); const e = { a, b, len, cls: 'footway', w: 4.5, w0: 4.5, load: 0, dens: 0, mx: (GN[a].x + GN[b].x) / 2, mz: (GN[a].z + GN[b].z) / 2 }; GE.push(e); const i = GE.length - 1; GN[a].adj.push([b, i]); GN[b].adj.push([a, i]); estEdge.on = true; estEdge.i = i; estEdge.a = a; estEdge.b = b; estEdge.len = len; for (const k in TREES) delete TREES[k]; _covOrder = null; } }
+  else if (pl.link === 0 && estEdge.on) { GE[estEdge.i].len = 1e6; estEdge.on = false; for (const k in TREES) delete TREES[k]; _covOrder = null; }
+  if (estEdge.on && pl.link > 0) parts.link = buildLink(estGroup, pl.link);
+  // path widths: base, then the link, then covered walkways
+  GE.forEach(e => e.w = e.w0); if (estEdge.on) GE[estEdge.i].w = [4.5, 4.5, 6.5, 9][pl.link] || 4.5;
+  if (save.up.cover > 0) { coverOrder().slice(0, COVER_N[save.up.cover]).forEach(ei => { GE[ei].w = GE[ei].w0 * COVER_W[save.up.cover]; }); parts.cover = buildCover(estGroup, save.up.cover); }
+  if (BLD.bates) { BLD.bates.extra = [0, 70, 150, 260][pl.servery] || 0; if (pl.servery > 0) parts.servery = buildServery(estGroup, pl.servery); }
+  for (const id in WINGS) if (pl[id] > 0) parts[id] = [].concat(...WINGS[id].map(k => buildWing(estGroup, k, pl[id])));
+  if (save.up.bays > 0 && typeof BAYS !== 'undefined' && BAYS.length) parts.bays = buildBays(estGroup, save.up.bays);
+  if (save.up.charge > 0 && LOC.sixthf) parts.charge = buildChargers(estGroup, save.up.charge);
+  if (animId && parts[animId]) {
+    const gs = [].concat(parts[animId]).filter(Boolean); const bb = new THREE.Box3(); gs.forEach(g => { estAnims.push({ g, t: 0, y: g.scale.y }); g.scale.y = .01; bb.expandByObject(g); }); gs.forEach(g => g.scale.y = .01);
+    const cx = (bb.min.x + bb.max.x) / 2, cz = (bb.min.z + bb.max.z) / 2; estDust(cx, cz, Math.max(bb.max.x - bb.min.x, 20) / 2); view.gx = cx; view.gz = cz; view.gzoom = Math.max(view.gzoom, 2.2); estGroup.userData.focus = [cx, cz];
+  }
   if (S.started) { S.parkCap = parkCapacity(); }
 }
 function buyEstate(id) {
-  const e = ESTATES.find(x => x.id === id), c = estCost(e); if (c == null || save.credits < c) return; if (estLocked(e)) { toast('warn', 'Not approved yet', 'The Sixth Form must petition for parking first'); return; } save.credits -= c;
-  if (id === 'bays') save.up.bays++; else save.plan[id]++; writeSave(); Snd.play('level'); applyEstates(id); if (typeof applyUpgradesLive === 'function') applyUpgradesLive(); renderSheet(); toast('building', e.name, 'Level ' + estLevel(id) + ' built'); confetti(60);
+  const e = LINE[id], c = estCost(e); if (!e || c == null || save.credits < c) return; if (estLocked(e)) { toast('warn', 'Not approved yet', 'The Sixth Form must petition for parking first'); return; }
+  save.credits -= c; const nl = estLevel(id) + 1; if (e.store === 'up') save.up[id] = nl; else save.plan[id] = nl;
+  if (e.wing) e.wing.forEach(k => { if (save.lastBn) save.lastBn[k] = 0; if (S.bn) { S.bn[k] = 0; S.bnWarn[k] = 0; } }); // judge the fix on new data
+  writeSave();
+  Snd.play('level'); applyEstates(id); if (typeof applyUpgradesLive === 'function') applyUpgradesLive();
+  if (id === 'speed' || id === 'shuttle') rebuildShuttleMeshes(); if (id === 'marsh') rebuildMarshalMeshes();
+  const f = estGroup.userData.focus || (id === 'speed' || id === 'shuttle' ? [LOC.sixthf.x, LOC.sixthf.z] : [view.gx, view.gz]); if (!estGroup.userData.focus) { view.gx = f[0]; view.gz = f[1]; }
+  estBurst(f[0], f[1], nl); tierPop(e, nl); renderSheet(); if (typeof checkAch === 'function') checkAch({ kind: '', stars: 0, goals: [], bestStreak: 0 }); confetti(30 + nl * 35);
 }
 const estDemandText = () => 'Sixth Form drivers: ~' + parkDemand() + ' · permit spaces: ' + parkCapacity();
 
-/* ---- build animation: the part rises out of the ground with a puff of dust ---- */
+/* ---------- build effects: the part rises out of the ground, a tier-coloured shockwave and sparks, a banner ---------- */
 let dustPts = null, dustT = 0;
 function estDust(x, z, r) {
   if (dustPts) world.remove(dustPts); const n = 70, pos = new Float32Array(n * 3), vel = []; for (let i = 0; i < n; i++) { const a = Math.random() * 6.28, rr = Math.random() * r; pos[i * 3] = x + Math.cos(a) * rr; pos[i * 3 + 1] = .5; pos[i * 3 + 2] = z + Math.sin(a) * rr; vel.push([Math.cos(a) * (2 + Math.random() * 6), 3 + Math.random() * 9, Math.sin(a) * (2 + Math.random() * 6)]); }
   const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); dustPts = new THREE.Points(g, new THREE.PointsMaterial({ color: '#e9dfc8', size: 5, transparent: true, opacity: .9, depthWrite: false })); dustPts.frustumCulled = false; dustPts.userData.vel = vel; world.add(dustPts); dustT = 0;
 }
-function updEstAnim(dt) {
-  for (let i = estAnims.length - 1; i >= 0; i--) { const a = estAnims[i]; a.t += dt; const k = clamp(a.t / 1.3, 0, 1), e = k < 1 ? 1 - Math.pow(1 - k, 3) + Math.sin(k * 3.14) * .12 : 1; a.g.scale.y = Math.max(.01, e); if (k >= 1) { a.g.scale.y = 1; estAnims.splice(i, 1); } }
-  if (dustPts) { dustT += dt; const p = dustPts.geometry.attributes.position, v = dustPts.userData.vel; for (let i = 0; i < v.length; i++) { p.array[i * 3] += v[i][0] * dt; p.array[i * 3 + 1] += v[i][1] * dt; p.array[i * 3 + 2] += v[i][2] * dt; v[i][1] -= 9 * dt; } p.needsUpdate = true; dustPts.material.opacity = Math.max(0, .9 - dustT * .7); if (dustT > 1.4) { world.remove(dustPts); dustPts = null; } }
+function estBurst(x, z, tier) {
+  const T = TIERS[tier]; if (!T) return;
+  for (let i = 0; i < 2; i++) { const ring = new THREE.Mesh(new THREE.RingGeometry(1, 1.9, 56), new THREE.MeshBasicMaterial({ color: T.c, transparent: true, opacity: .9, side: THREE.DoubleSide, depthWrite: false })); ring.rotation.x = -Math.PI / 2; ring.position.set(x, 1 + i * .2, z); ring.renderOrder = 8; world.add(ring); estFx.push({ m: ring, t: -i * .35, life: 1.6, kind: 'ring', r1: 38 + tier * 22 + i * 20 }); }
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 2.6, 120, 20, 1, true), new THREE.MeshBasicMaterial({ color: T.c, transparent: true, opacity: .5, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending })); beam.position.set(x, 60, z); world.add(beam); estFx.push({ m: beam, t: 0, life: 2.2, kind: 'beam' });
+  const n = 40 + tier * 40, pos = new Float32Array(n * 3), vel = []; for (let i = 0; i < n; i++) { const a = Math.random() * 6.28, rr = Math.random() * 8; pos[i * 3] = x + Math.cos(a) * rr; pos[i * 3 + 1] = 2; pos[i * 3 + 2] = z + Math.sin(a) * rr; vel.push([Math.cos(a) * (4 + Math.random() * 14), 14 + Math.random() * 26, Math.sin(a) * (4 + Math.random() * 14)]); }
+  const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.BufferAttribute(pos, 3)); const sp = new THREE.Points(sg, new THREE.PointsMaterial({ color: tier === 3 ? '#ffe08a' : T.c, size: 3.4, transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending })); sp.frustumCulled = false; world.add(sp); estFx.push({ m: sp, t: 0, life: 1.8, kind: 'spark', vel });
 }
-/* ---- in-game estates dock (buy mid-day, like a factory build menu) ---- */
+function tierPop(e, lv) {
+  const T = TIERS[lv]; const el = document.createElement('div'); el.className = 'tierpop t' + lv;
+  el.innerHTML = '<small>' + esc(e.name) + '</small><b>' + T.n + '</b><span>' + esc(e.tn[lv - 1]) + '</span><i>' + esc(e.stat ? e.stat(lv) : '') + '</i>'; document.body.appendChild(el); setTimeout(() => el.remove(), 3400);
+}
+function updEstAnim(dt) {
+  for (let i = estAnims.length - 1; i >= 0; i--) { const a = estAnims[i]; a.t += dt; const k = clamp(a.t / 1.5, 0, 1), e = k < 1 ? 1 - Math.pow(1 - k, 3) + Math.sin(k * 3.14) * .1 : 1; a.g.scale.y = Math.max(.01, e); if (k >= 1) { a.g.scale.y = 1; estAnims.splice(i, 1); } }
+  if (dustPts) { dustT += dt; const p = dustPts.geometry.attributes.position, v = dustPts.userData.vel; for (let i = 0; i < v.length; i++) { p.array[i * 3] += v[i][0] * dt; p.array[i * 3 + 1] += v[i][1] * dt; p.array[i * 3 + 2] += v[i][2] * dt; v[i][1] -= 9 * dt; } p.needsUpdate = true; dustPts.material.opacity = Math.max(0, .9 - dustT * .7); if (dustT > 1.4) { world.remove(dustPts); dustPts = null; } }
+  for (let i = estFx.length - 1; i >= 0; i--) {
+    const f = estFx[i]; f.t += dt; if (f.t < 0) { f.m.visible = false; continue; } f.m.visible = true; const k = f.t / f.life;
+    if (k >= 1) { world.remove(f.m); if (f.m.geometry) f.m.geometry.dispose(); if (f.m.material) f.m.material.dispose(); estFx.splice(i, 1); continue; }
+    if (f.kind === 'ring') { const s = 1 + (f.r1 - 1) * (1 - Math.pow(1 - k, 3)); f.m.scale.set(s, s, 1); f.m.material.opacity = .9 * (1 - k); }
+    else if (f.kind === 'beam') { f.m.material.opacity = .5 * (1 - k) * (1 - k); f.m.scale.x = f.m.scale.z = 1 + k * .8; }
+    else { const p = f.m.geometry.attributes.position; for (let j = 0; j < f.vel.length; j++) { p.array[j * 3] += f.vel[j][0] * dt; p.array[j * 3 + 1] += f.vel[j][1] * dt; p.array[j * 3 + 2] += f.vel[j][2] * dt; f.vel[j][1] -= 22 * dt; } p.needsUpdate = true; f.m.material.opacity = 1 - k; }
+  }
+  if (estGlows.length) { const v = 1 + Math.sin(performance.now() / 380) * .6; estGlows.forEach(m => m.emissiveIntensity = v); }
+}
+
+/* ---------- bottlenecks: the factory-game alert system ---------- */
+const BN_MIN = 500; // boy-minutes lost waiting outside a full building before it counts as a bottleneck
+const bnOf = k => Math.max((S.bn && S.bn[k]) || 0, (save.lastBn && save.lastBn[k]) || 0);
+function bottlenecks() { // [{k, v, line}] biggest first, only ones an upgrade can fix
+  const out = []; for (const id in WINGS) for (const k of WINGS[id]) { const v = bnOf(k); if (v >= BN_MIN && estLevel(id) < 3) out.push({ k, id, v: Math.round(v), line: fmtN(Math.round(v)) + ' boy-minutes spent waiting outside ' + nameOf(k) }); }
+  return out.sort((a, b) => b.v - a.v);
+}
+function urgencyOf(e) { // text when this line fixes a live problem, else null
+  if (e.wing) { let k = null, v = 0; e.wing.forEach(q => { const x = bnOf(q); if (x > v) { v = x; k = q; } }); return v >= BN_MIN && estLevel(e.id) < 3 ? 'Bottleneck: ' + fmtN(Math.round(v)) + ' boy-minutes lost outside ' + nameOf(k) : null; }
+  if (e.id === 'park' && parkDemand() > parkCapacity()) return 'Demand ' + parkDemand() + ' is above the ' + parkCapacity() + ' spaces';
+  if (e.id === 'bays' && S.cwN > 3 && S.cwTot / S.cwN > 3.5 && estLevel('bays') < 3) return 'Coaches are waiting ' + (S.cwTot / S.cwN).toFixed(1) + ' min on average';
+  return null;
+}
+const tierPips = (lv, max) => '<span class="tpips">' + Array.from({ length: max }, (_, i) => '<i class="' + (i < lv ? 't' + (i + 1) : '') + '"></i>').join('') + '</span>';
+function estCard(e, compact) {
+  const lv = estLevel(e.id), c = estCost(e), lock = estLocked(e), can = c != null && !lock && save.credits >= c, nx = Math.min(lv + 1, e.max), urg = urgencyOf(e);
+  const nxt = lv < e.max ? 'Next · ' + TIERS[lv + 1].n + ' · ' + e.tn[lv] : 'Complete · ' + e.tn[e.max - 1];
+  const delta = e.stat ? (lv < e.max ? esc(e.stat(lv)) + ' <i>→</i> <b>' + esc(e.stat(nx)) + '</b>' : '<b>' + esc(e.stat(lv)) + '</b>') : '';
+  const btn = c == null ? '<span class="pill ok">' + (TIERS[lv] ? TIERS[lv].n : '') + ' · Max</span>' : '<button class="buy' + (can ? ' ready' : '') + '" data-act="buyest" data-id="' + e.id + '"' + (can ? '' : ' disabled') + '>' + (lock ? ICON.lock : c + ' cr') + '</button>';
+  if (compact) return '<div class="ed-row t' + lv + (lock ? ' lock' : '') + (urg ? ' urg' : '') + '"><div class="eic">' + (ICON[e.ic] || ICON.building) + '</div><div class="et"><b>' + esc(e.name) + tierPips(lv, e.max) + '</b><small>' + (lock ? 'Locked · petition needed' : urg ? '⚠ ' + esc(urg) : c == null ? delta : esc(e.tn[lv]) + ' · ' + delta) + '</small></div>' + btn + '</div>';
+  return '<div class="est t' + lv + (urg ? ' urg' : '') + '"><div class="eic">' + (ICON[e.ic] || ICON.building) + '</div><div class="et"><b>' + esc(e.name) + tierPips(lv, e.max) + '</b><small class="tn">' + esc(nxt) + '</small><small>' + esc(e.desc[Math.min(lv, e.max - 1)]) + '</small>' + (delta ? '<small class="delta">' + delta + '</small>' : '') + '<small class="eff' + (urg ? ' bad' : '') + '">' + (lock ? esc(estLockText()) : urg ? '⚠ ' + esc(urg) : esc(e.eff)) + '</small></div>' + btn + '</div>';
+}
+/* ---- in-game estates dock (buy mid-day, like a factory build menu): live problems float to the top ---- */
 function updEstDock() {
   const el = $('#estdock'); if (!UI.dock) { el.hidden = true; return; } el.hidden = false;
-  const rows = ESTATES.map(e => { const c = estCost(e), lv = estLevel(e.id), lock = estLocked(e), can = c != null && !lock && save.credits >= c; return '<div class="ed-row' + (lock ? ' lock' : '') + '"><div class="eic">' + (ICON[e.ic] || ICON.building) + '</div><div class="et"><b>' + e.name + '<span class="pips">' + Array.from({ length: e.max }, (_, i) => '<i class="' + (i < lv ? 'on' : '') + '"></i>').join('') + '</span></b><small>' + (lock ? 'Locked · petition needed' : c == null ? 'Fully built' : e.eff) + '</small></div>' + (c == null ? '<span class="pill ok">Built</span>' : '<button class="buy' + (can ? ' ready' : '') + '" data-act="buyest" data-id="' + e.id + '"' + (can ? '' : ' disabled') + '>' + (lock ? ICON.lock : c + ' cr') + '</button>') + '</div>'; }).join('');
+  const score = e => (urgencyOf(e) ? 0 : 2) + (estCost(e) != null && save.credits >= estCost(e) && !estLocked(e) ? 0 : 1);
+  const rows = ESTATES.slice().sort((a, b) => score(a) - score(b)).map(e => estCard(e, true)).join('');
   setHTML(el, 'estdock', '<div class="ed-h"><div><label>Estates</label><b>Campus level ' + campusLevel() + '</b></div><div class="ed-cr"><label>Credits</label><b>' + fmtN(save.credits) + '</b></div><button class="ib" data-act="dock">' + ICON.x + '</button></div>' + rows + '<p class="ed-note">' + estDemandText() + '</p>');
 }
 
@@ -2401,7 +2735,7 @@ function updBar() {
   const cc = $('#comboChip'); cc.hidden = !(scored && S.streak >= 3); if (!cc.hidden) { $('#comboX').textContent = '×' + comboMult().toFixed(2); $('#comboPips').innerHTML = Array.from({ length: 6 }, (_, i) => '<i class="' + (S.streak >= (i + 1) * 5 ? 'on' : '') + '"></i>').join(''); }
   $$('.speed button').forEach(b => b.setAttribute('aria-pressed', String(!S.running ? b.dataset.s === '0' : +b.dataset.s === S.speed)));
   const lv = levelOf(save.xp); $('#lvlN').textContent = lv; $('#lvlRank').textContent = rankOf(lv); $('#lvlSub').textContent = 'Level ' + lv + ' · ' + fmtN(save.credits) + ' cr'; $('#lvlXp').style.width = clamp((save.xp - xpFor(lv)) / (xpFor(lv + 1) - xpFor(lv)), 0, 1) * 100 + '%';
-  $('#estBtn').setAttribute('aria-pressed', String(!!UI.dock)); $('#handsBtn').setAttribute('aria-pressed', String(!!S.hands)); $('#lblBtn').setAttribute('aria-pressed', String(UI.labels)); $('#heatBtn').setAttribute('aria-pressed', String(UI.heat)); $('#buildBtn').setAttribute('aria-pressed', String(UI.build));
+  $('#estBtn').setAttribute('aria-pressed', String(!!UI.dock)); $('#estBtn').classList.toggle('alert', S.started && !S.over && bottlenecks().length > 0); $('#handsBtn').setAttribute('aria-pressed', String(!!S.hands)); $('#lblBtn').setAttribute('aria-pressed', String(UI.labels)); $('#heatBtn').setAttribute('aria-pressed', String(UI.heat)); $('#buildBtn').setAttribute('aria-pressed', String(UI.build));
   const bn = S.log.filter(l => l.kind === 'bad' || l.kind === 'warn').length; const bel = $('#bellN'); bel.hidden = !UI.unseen; bel.textContent = UI.unseen || 0;
 }
 
@@ -2527,11 +2861,11 @@ function focusSel() { const p = entPos(UI.sel); if (p) { view.gx = p.x; view.gz 
 const LBL = {};
 function buildLabels() {
   const box = $('#labels'); box.innerHTML = '';
-  for (const k in BLD) { const b = BLD[k]; if (!b.recs.length || b.cap < 30) continue; const minor = b.cap < 150 || ['security', 'grounds', 'pennes', 'cricketp', 'g_forest', 'artdt'].includes(k); const e = h('<div class="lbl ' + (b.side === 'g' ? 'g ' : '') + (minor ? 'sm' : '') + '">' + esc(b.name) + '<span class="n"></span></div>'); e.dataset.k = k; box.appendChild(e); LBL[k] = { e, minor }; }
+  for (const k in BLD) { const b = BLD[k]; if (!b.recs.length || b.cap < 30) continue; const minor = b.cap < 150 || ['security', 'grounds', 'pennes', 'cricketp', 'g_forest', 'artdt'].includes(k); const e = h('<div class="lbl ' + (b.side === 'g' ? 'g ' : '') + (minor ? 'sm' : '') + '">' + esc(b.name) + '<span class="tb"></span><span class="n"></span></div>'); e.dataset.k = k; box.appendChild(e); LBL[k] = { e, minor }; }
 }
 function updLabels() {
   const show = UI.labels; $('#labels').style.display = show ? '' : 'none'; if (!show) return;
-  for (const k in LBL) { const L = LBL[k], b = BLD[k]; if (L.minor && view.zoom < 1.5) { L.e.style.display = 'none'; continue; } const p = toScreen(b.cx, 14, b.cz); if (!p.vis || p.x < -80 || p.x > innerWidth + 80 || p.y < 66 || p.y > innerHeight - 20 || (p.y < 160 && p.x < 700) || (p.x < 340 && p.y < 310) || (innerWidth > 900 && p.x > innerWidth - 380 && p.y > 540)) { L.e.style.display = 'none'; continue; } L.e.style.display = ''; L.e.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px) translate(-50%,-50%)'; const cap = capNow(k); L.e.classList.toggle('hot', b.occ > cap * .9 || b.closedUntil > S.t); const n = L.e.querySelector('.n'); const t = b.closedUntil > S.t ? 'closed' : b.occ ? String(b.occ) : ''; if (n.textContent !== t) n.textContent = t; }
+  for (const k in LBL) { const L = LBL[k], b = BLD[k]; if (L.minor && view.zoom < 1.5) { L.e.style.display = 'none'; continue; } const p = toScreen(b.cx, 14, b.cz); if (!p.vis || p.x < -80 || p.x > innerWidth + 80 || p.y < 66 || p.y > innerHeight - 20 || (p.y < 160 && p.x < 700) || (p.x < 340 && p.y < 310) || (innerWidth > 900 && p.x > innerWidth - 380 && p.y > 540)) { L.e.style.display = 'none'; continue; } L.e.style.display = ''; L.e.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px) translate(-50%,-50%)'; const cap = capNow(k); L.e.classList.toggle('hot', b.occ > cap * .9 || b.closedUntil > S.t); const n = L.e.querySelector('.n'); const t = b.closedUntil > S.t ? 'closed' : b.occ ? String(b.occ) : ''; if (n.textContent !== t) n.textContent = t; const tb = L.e.querySelector('.tb'), tt = bldTier(k), tx = tt ? TIERS[tt].r : ''; if (tb.textContent !== tx) { tb.textContent = tx; tb.className = 'tb' + (tt ? ' t' + tt : ''); } }
 }
 
 /* ---- dropdowns ---- */
@@ -2579,13 +2913,6 @@ function drainEvents() {
 
 /* ---- 31_menu.js ---- */
 /* ================= MENU, UPGRADES, ACHIEVEMENTS, REPORT, TUTORIAL ================= */
-const UPG = [
-  { id: 'shuttle', name: 'Extra EV shuttle', desc: 'One more shuttle for Sixth Form crossings.', max: 2, cost: [100, 220] },
-  { id: 'speed', name: 'Shuttle motors', desc: '+20% shuttle speed per level.', max: 2, cost: [90, 180] },
-  { id: 'charge', name: 'Fast chargers', desc: 'Shuttles top up their batteries much faster.', max: 2, cost: [80, 160] },
-  { id: 'marsh', name: 'Marshal team', desc: 'One more marshal to calm crowded paths per level.', max: 3, cost: [70, 130, 220] },
-  { id: 'cover', name: 'Covered walkways', desc: 'Rain and snow slow boys far less.', max: 2, cost: [110, 220] }
-];
 const ACH = [
   { id: 'first', name: 'First bell', desc: 'Finish any school day.', ic: 'clock', t: r => true },
   { id: 'full', name: 'Full marks', desc: 'Earn three stars in one day.', ic: 'star', t: r => r.stars === 3 },
@@ -2596,6 +2923,11 @@ const ACH = [
   { id: 'never', name: 'Never late', desc: 'Every lesson on time on a Normal day.', ic: 'cap', t: r => r.kind === 'normal' && S.tot > 20 && S.on === S.tot },
   { id: 'every', name: 'Every kind of day', desc: 'Complete all five special days.', ic: 'map', t: r => DAY_ORDER.every(k => save.best[k]) },
   { id: 'winter', name: 'Snow day hero', desc: 'Two stars or better on Winter weather.', ic: 'snow', t: r => r.kind === 'winter' && r.stars >= 2 },
+  { id: 'tier3', name: 'Top tier', desc: 'Take any estate line to Tier III.', ic: 'building', t: r => ESTATES.some(e => estLevel(e.id) >= 3) },
+  { id: 'skyline', name: 'New skyline', desc: 'Build a wing on all five capacity lines.', ic: 'building', t: r => Object.keys(WINGS).every(id => save.plan[id] > 0) },
+  { id: 'gold', name: 'Gold standard', desc: 'Earn a Gold medal or better on any day.', ic: 'trophy', t: r => r.medal === 'gold' || r.medal === 'platinum' },
+  { id: 'platinum', name: 'Platinum day', desc: 'Earn a Platinum medal: 112% of the day’s potential.', ic: 'star', t: r => r.medal === 'platinum' },
+  { id: 'campus20', name: 'Campus level 20', desc: 'Reach campus level 20 across the estates.', ic: 'wrench', t: r => campusLevel() >= 20 },
   { id: 'estates', name: 'Estates office', desc: 'Buy five upgrade levels.', ic: 'wrench', t: r => Object.values(save.up).reduce((a, b) => a + b, 0) + Object.values(save.plan).reduce((a, b) => a + b, 0) >= 5 },
   { id: 'fullhouse', name: 'Full house', desc: 'Have 1,000 boys on site at once.', ic: 'people', t: r => S.peakSite >= 1000 },
   { id: 'parked', name: 'Parking fairy', desc: 'Win three parking scenarios in total.', ic: 'cap', t: r => save.stats.scn >= 3 },
@@ -2604,10 +2936,9 @@ const ACH = [
   { id: 'seated', name: 'Standing room only', desc: 'Seat 95% of the school for the ceremony.', ic: 'trophy', t: r => r.kind === 'speech' && S.ceremony >= .95 }
 ];
 function checkAch(rep) { const got = []; for (const a of ACH) { if (!save.ach[a.id] && a.t(rep)) { save.ach[a.id] = S.t; got.push(a); } } if (got.length) writeSave(); return got; }
-const upCost = u => save.up[u.id] >= u.max ? null : u.cost[save.up[u.id]];
-function buyUp(id) { const u = UPG.find(x => x.id === id), c = upCost(u); if (c == null || save.credits < c) return; save.credits -= c; save.up[id]++; writeSave(); Snd.play('build'); applyUpgradesLive(); renderSheet(); checkAch({ kind: '', stars: 0, goals: [], bestStreak: 0 }); }
+const buyUp = id => buyEstate(id);
 function applyUpgradesLive() { // upgrades take effect immediately when sensible
-  if (!S.started) return; const open = 6 + 2 * save.up.bays;  BAYS.forEach(b => b.locked = b.i >= open); while (SHUTTLES.length < 2 + save.up.shuttle) { const i = SHUTTLES.length, st = STATIONS()[i % 2]; SHUTTLES.push({ id: i, name: 'EV ' + (i + 1), x: st.x + 3, z: st.z + 4 + i * 3, st: 'idle', bat: 100, home: st.k, task: null, load: 0, trips: 0, down: 0, ang: 0 }); emit('shuttleAdded', {}); }
+  if (!S.started) return; const open = openBays();  BAYS.forEach(b => b.locked = b.i >= open); while (SHUTTLES.length < 2 + save.up.shuttle) { const i = SHUTTLES.length, st = STATIONS()[i % 2]; SHUTTLES.push({ id: i, name: 'EV ' + (i + 1), x: st.x + 3, z: st.z + 4 + i * 3, st: 'idle', bat: 100, home: st.k, task: null, load: 0, trips: 0, down: 0, ang: 0 }); emit('shuttleAdded', {}); }
 }
 
 /* ---- modal ---- */
@@ -2627,11 +2958,12 @@ function renderSheet() {
     body = '<div class="banner"><div><b>' + (save.stats.days ? 'Welcome back, ' + rankOf(levelOf(save.xp)) : 'Welcome to Campus Control') + '</b><span>It starts as the boys’ school only. The Sixth Form share lessons with the Girls’ buildings next door. Pick who you are, pick a day, and play. The day starts as soon as you press Play.</span></div><button class="btn primary" data-act="play">' + ICON.play + ' Play as ' + R.name + '</button></div>' +
       '<h2 class="sect">1 · Who are you?</h2><div class="roles">' + ROLE_ORDER.map(k => { const r = ROLES[k], rs = save.rstat[k]; return '<button class="rolecard" data-act="pickrole" data-k="' + k + '" aria-pressed="' + (M.role === k) + '"><div class="ric">' + (ICON[r.ic] || ICON.user) + '</div><b>' + r.name + '</b><small>' + r.tag + '</small>' + (rs ? '<span class="mono">' + rs.days + ' days · best ' + fmtN(rs.best) + '</span>' : '') + '</button>'; }).join('') + '</div><p class="roleintro">' + esc(R.intro) + '</p>' +
       '<h2 class="sect">2 · Which day? <small>levels unlock with stars</small></h2><div class="days">' + DAY_ORDER.map(k => { const d = DAYDEF[k], un = dayUnlocked(k), b = save.best[k]; return '<button class="daycard" data-act="pick" data-k="' + k + '" aria-pressed="' + (M.pick === k) + '"' + (un ? '' : ' disabled') + '><div class="sc-top"><span class="code">' + d.code + '</span><span class="diff">' + Array.from({ length: 5 }, (_, i) => '<i class="' + (i < d.diff ? 'on' : '') + '"></i>').join('') + '</span></div><h3>' + d.name + '</h3><p>' + d.sub + '</p><div class="facts">' + d.facts.map(f => '<span class="pill">' + f + '</span>').join('') + '</div>' + (un ? '<div class="stars" style="margin-left:0">' + [0, 1, 2].map(i => starSvg(b && i < b.stars)).join('') + (b ? '<span class="mono" style="margin-left:8px;font-size:11px;color:var(--ink-3)">best ' + fmtN(b.score) + '</span>' : '') + '</div>' : '<div class="lock">' + ICON.lock + 'Unlocks at ' + d.unlock + ' stars (you have ' + totalStars() + ')</div>') + '</button>'; }).join('') + '</div>' +
-      '<div class="m-grid"><div class="m-box brief"><h2>' + D_.name + ' · briefing</h2><p class="note">' + D_.desc + '</p><ul>' + [D_.goals[0], D_.goals[1], R.goal].map(g => '<li><span>' + g.label + '</span><b>' + g.tl + '</b></li>').join('') + '</ul></div><div class="m-box brief"><h2>How to play</h2><ul class="rules"><li>Coaches arrive and dock by themselves. Switch on <b>Hands-on</b> to dock every coach yourself for ×1.25 points.</li><li>Scenarios pop up: the camera zooms in and you do something. Parking permits, missing boys, queues, fixtures, trips, clubs.</li><li>Crowded paths slow everyone. Marshals and re-rooming help.</li><li>Earn credits, then spend them in <b>Estates</b>: a Sixth Form car park, a Joint Hub and a link path. More boys join each day, so keep building.</li></ul></div></div>';
+      '<div class="m-grid"><div class="m-box brief"><h2>' + D_.name + ' · briefing</h2><p class="note">' + D_.desc + '</p><ul>' + [D_.goals[0], D_.goals[1], R.goal].map(g => '<li><span>' + g.label + '</span><b>' + g.tl + '</b></li>').join('') + '</ul></div><div class="m-box brief"><h2>How to play</h2><ul class="rules"><li>Coaches arrive and dock by themselves. Switch on <b>Hands-on</b> to dock every coach yourself for ×1.25 points. Points come from <b>boys delivered on time</b>; a late group costs you.</li><li>Scenarios pop up: the camera zooms in and you do something. Parking permits, missing boys, queues, fixtures, trips, clubs.</li><li>Crowded paths slow everyone. Marshals and re-rooming help.</li><li>The school <b>grows every day</b>. Buildings fill up and boys queue outside. Spend credits in <b>Estates</b> on wings, canopies, the Hub and more. Every tier looks different and works better.</li></ul></div></div>';
   } else if (M.tab === 'upg') {
-    const card = e => { const c = estCost(e), lv = estLevel(e.id), lock = estLocked(e); return '<div class="est"><div class="eic">' + (ICON[e.ic] || ICON.building) + '</div><div class="et"><b>' + e.name + '<span class="pips">' + Array.from({ length: e.max }, (_, i) => '<i class="' + (i < lv ? 'on' : '') + '"></i>').join('') + '</span></b><small>' + e.desc[Math.min(lv, e.max - 1)] + '</small><small class="eff">' + (lock ? estLockText() : e.eff) + '</small></div>' + (c == null ? '<span class="pill ok">Built</span>' : '<button class="buy" data-act="buyest" data-id="' + e.id + '"' + (save.credits < c || lock ? ' disabled style="opacity:.5"' : '') + '>' + (lock ? ICON.lock : c + ' cr') + '</button>') + '</div>'; };
-    body = '<div class="callout ' + (parkDemand() > parkCapacity() ? 'warn' : 'ok') + '"><b>Campus level ' + campusLevel() + ' · enrolment ' + Math.round(save.enrol * 100) + '%</b> · ' + estDemandText() + (parkDemand() > parkCapacity() ? '. Demand is outgrowing the car park.' : '.') + '</div>' +
-      '<div class="m-box"><h2>Joint Sixth Form &amp; estates</h2><p class="note">Spend the credits from finished days. Builds appear on the 3D campus straight away.</p>' + ESTATES.map(card).join('') + '</div><div class="m-box" style="margin-top:12px"><h2>Transport &amp; people</h2>' + UPG.map(u => { const c = upCost(u), lv = save.up[u.id]; return '<div class="up"><div><b>' + u.name + '<span class="pips">' + Array.from({ length: u.max }, (_, i) => '<i class="' + (i < lv ? 'on' : '') + '"></i>').join('') + '</span></b><small>' + u.desc + '</small></div>' + (c == null ? '<span class="pill ok">Maxed</span>' : '<button class="buy" data-act="buy" data-id="' + u.id + '"' + (save.credits < c ? ' disabled style="opacity:.5"' : '') + '>' + c + ' cr</button>') + '</div>'; }).join('') + '</div>';
+    const bn = bottlenecks(), dem = parkDemand() > parkCapacity();
+    body = '<div class="callout ' + (bn.length ? 'warn' : dem ? 'warn' : 'ok') + '"><b>Campus level ' + campusLevel() + ' · enrolment ' + Math.round(save.enrol * 100) + '%</b><span>' + (bn.length ? esc(bn[0].line) + (bn.length > 1 ? ' (and ' + (bn.length - 1) + ' more)' : '') + '. Build a wing to fix it.' : 'No bottlenecks yet. The school grows every day, so keep an eye on the buildings.') + (dem ? ' Sixth Form parking demand is above capacity.' : '') + '</span></div>' +
+      '<p class="note" style="margin:10px 2px 0">Spend credits from finished days. Each tier changes the look of the campus <b>and</b> what it can do, and costs about twice the last. Builds appear on the 3D campus straight away.</p>' +
+      GROUPS_ORDER.map(gr => '<div class="m-box" style="margin-top:12px"><h2>' + gr + '</h2>' + ESTATES.filter(e => e.group === gr).map(e => estCard(e, false)).join('') + '</div>').join('');
   } else if (M.tab === 'ach') {
     body = '<div class="achs">' + ACH.map(a => '<div class="achv ' + (save.ach[a.id] ? 'got' : '') + '"><div class="ai">' + (ICON[a.ic] || ICON.star) + '</div><div><b>' + a.name + '</b><small>' + a.desc + '</small></div></div>').join('') + '</div>';
   } else if (M.tab === 'set') {
@@ -2650,9 +2982,9 @@ function renderReport(sh) {
   const r = M.report; if (!r) return; const D_ = DAYDEF[r.kind]; const lv = levelOf(save.xp), pct = clamp((save.xp - xpFor(lv)) / (xpFor(lv + 1) - xpFor(lv)), 0, 1);
   const L = r.led; const rows = [['Lessons and events on time', L.lessons], ['Coaches away', L.coaches], ['Incidents handled', L.incidents], ['Scenarios', L.scenarios], ['Clubs', L.clubs], ['Bonuses', (L.bonus || 0) + (L.drill || 0)], ['Spent on fixes', L.costs], ['Penalties', L.penalties]].filter(x => x[1]);
   sh.innerHTML = '<div class="m-top"><div><div class="eyebrow">End of day · ' + D_.name + '</div><h1>' + (r.stars === 3 ? 'A flawless day' : r.stars === 2 ? 'A smooth day' : r.stars === 1 ? 'A bumpy day' : 'A tough one') + '</h1><p class="lede">' + (r.stars === 3 ? 'The whole campus ran like a well-timed bell.' : 'Learn from the late groups and try again — upgrades help.') + '</p></div></div>' +
-    '<div class="report-hero"><div><div class="big-score">' + fmtN(r.score) + '</div><small style="color:var(--ink-3)">' + (r.newBest ? 'New best!' : 'Best ' + fmtN(r.best)) + '</small></div><div class="big-stars">' + [0, 1, 2].map(i => starSvg(i < r.stars)).join('') + '</div><div class="xpline"><div class="lab"><span>' + rankOf(lv) + ' · level ' + lv + '</span><span>+' + r.xp + ' xp</span></div><div class="meter"><i style="width:' + pct * 100 + '%"></i></div></div></div>' +
+    '<div class="report-hero"><div><div class="big-score">' + fmtN(r.score) + '</div><small style="color:var(--ink-3)">' + (r.newBest ? 'New best!' : 'Best ' + fmtN(r.best)) + '</small>' + (r.medal && r.medal !== 'none' ? '<div class="medal ' + r.medal + '">' + MEDALS.find(m => m.id === r.medal).name + ' · ' + Math.round(r.eff * 100) + '% of potential</div>' : '<div class="medal none">' + Math.round((r.eff || 0) * 100) + '% of potential · Bronze at 60%</div>') + '</div><div class="big-stars">' + [0, 1, 2].map(i => starSvg(i < r.stars)).join('') + '</div><div class="xpline"><div class="lab"><span>' + rankOf(lv) + ' · level ' + lv + '</span><span>+' + r.xp + ' xp</span></div><div class="meter"><i style="width:' + pct * 100 + '%"></i></div></div></div>' +
     (r.lvNew > r.lvOld ? '<div class="callout gold">' + ICON.up + ' Level up! You are now ' + rankOf(r.lvNew) + '.</div>' : '') +
-    '<div class="callout ok">+' + r.credits + ' credits earned · ' + fmtN(save.credits) + ' to spend · ' + r.scnWin + ' scenario' + (r.scnWin === 1 ? '' : 's') + ' solved</div>' + (r.enrolTo > r.enrolFrom ? '<div class="callout">Enrolment grows to ' + Math.round(r.enrolTo * 100) + '%. About ' + parkDemand() + ' Sixth Form drivers will want a space next time (you have ' + parkCapacity() + '). Check Estates.</div>' : '') +
+    '<div class="callout ok">+' + r.credits + ' credits earned · ' + fmtN(save.credits) + ' to spend · ' + r.scnWin + ' scenario' + (r.scnWin === 1 ? '' : 's') + ' solved</div>' + (r.bn && r.bn.length ? '<div class="callout warn">' + ICON.warn + '<span><b>Bottlenecks today:</b> ' + r.bn.map(b => esc(nameOf(b.k)) + ' (' + fmtN(b.v) + ' boy-min)').join(', ') + '. Wings in Estates add real capacity.</span></div>' : '') + (r.enrolTo > r.enrolFrom ? '<div class="callout">Enrolment grows to ' + Math.round(r.enrolTo * 100) + '%. About ' + parkDemand() + ' Sixth Form drivers will want a space next time (you have ' + parkCapacity() + '). Check Estates.</div>' : '') +
     '<div class="m-grid"><div class="m-box"><h2>Goals</h2><ul class="ledger">' + r.goals.map(g => '<li><span>' + (g.ok ? '★ ' : '☆ ') + g.label + ' <small style="color:var(--ink-3)">' + g.tl + '</small></span><b class="' + (g.ok ? '' : 'neg') + '">' + g.txt + '</b></li>').join('') + '</ul></div><div class="m-box"><h2>Score</h2><ul class="ledger">' + rows.map(x => '<li><span>' + x[0] + '</span><b class="' + (x[1] < 0 ? 'neg' : '') + '">' + (x[1] > 0 ? '+' : '') + fmtN(x[1]) + '</b></li>').join('') + '<li><span>Best streak</span><b>' + r.bestStreak + '</b></li><li><span>Peak boys on site</span><b>' + fmtN(S.peakSite) + '</b></li></ul></div></div>' +
     (r.ach && r.ach.length ? '<div class="achs" style="margin-top:12px">' + r.ach.map(a => '<div class="achv got"><div class="ai">' + (ICON[a.ic] || ICON.star) + '</div><div><b>' + a.name + '</b><small>' + a.desc + '</small></div></div>').join('') + '</div>' : '') +
     '<div class="m-foot"><button class="btn primary" data-act="replay">' + ICON.play + ' Play again</button><button class="btn gold" data-act="menutab" data-k="upg">Spend credits</button><button class="btn ghost" data-act="report-menu">All days</button><span style="margin-left:auto;font-size:11px;color:var(--ink-3)">Unofficial fan project</span></div>';
@@ -2664,7 +2996,8 @@ const TUT = [
   { t: 'Five roles, five jobs', p: '<b>School Captain</b> (parking, lost boys, queues), <b>General student</b> (follow one boy), <b>Head of Sixth Form</b> (joint lessons and parking), <b>Headmaster</b> (approve fixtures, trips, clubs), <b>Executive Principal</b> (both schools). Each has its own goal.', at: null },
   { t: 'Levels are different days', p: 'Normal day, Open Day, Sports Day, Winter weather and Speech Day. Each has three goals worth a star each. Collect stars to unlock the harder days.', at: '.daychip' },
   { t: 'The real timetable', p: 'Grounds open 08:00, tutor time 08:35, Period 0, then Periods 1–5, lunch and clubs, school ends 16:00 and coaches leave from 16:15. Coaches dock on their own. Turn on <b>Hands-on</b> to dock them yourself for ×1.25 points.', at: '#handsBtn' },
-  { t: 'Sixth Form: joint with the Girls’', p: 'Sixth Formers have <b>mixed lessons</b> in the Girls’ buildings. They are a long walk, so EV shuttles help. As the Sixth Form grows, spend credits in <b>Estates</b>: a Sixth Form car park by the Astro, a Joint Hub, and a link path.', at: '#lvlChip' },
+  { t: 'Sixth Form: joint with the Girls’', p: 'Sixth Formers have <b>mixed lessons</b> in the Girls’ buildings. They are a long walk, so EV shuttles help. A Sixth Form car park, a Joint Hub and a link path all live in <b>Estates</b>.', at: '#lvlChip' },
+  { t: 'The school grows every day', p: 'More boys join after each day. Buildings fill up and groups queue outside, and every boy waiting is points lost. Open <b>Estates</b> (the hammer) and build the fix: extra storeys, canopies, a bigger car park. <b>Each tier looks different and works better.</b>', at: '#estBtn' },
   { t: 'Scenarios', p: 'Things will happen: parking requests, a missing boy, a Bates queue, fixtures, trips, clubs. The camera zooms in and the day pauses while you deal with it. Click things in 3D and read the panel at the bottom.', at: '#kpis' },
   { t: 'Ready?', p: 'The day starts as soon as you press Got it. Use <kbd>Space</kbd> to pause, 1× or 3× to speed up, and <kbd>H</kbd> for Hands-on.', at: '.speed' }
 ];
@@ -2717,7 +3050,7 @@ document.addEventListener('click', e => {
     case 'pick': M.pick = d.k; renderSheet(); break;
     case 'play': M.report = null; { beginDay(M.pick, M.role); if (!save.tutorial) startTut(); else startRun(); } break;
     case 'closemenu': closeMenu(); break;
-    case 'buy': buyUp(d.id); break;
+    case 'buy': buyEstate(d.id); break;
     case 'set': { const k = d.id; save.settings[k] = !save.settings[k]; writeSave(); Snd.apply(); if (k === 'shadows') { renderer.shadowMap.enabled = save.settings.shadows; scene.traverse(o => { if (o.material) o.material.needsUpdate = true; }); } if (k === 'labels') UI.labels = save.settings.labels; renderSheet(); break; }
     case 'tut': closeMenuQuiet(); if (S.running) S.running = false; startTut(); break;
     case 'tutnext': tutI++; showTut(); break;
@@ -2799,23 +3132,35 @@ function makeCoach(c) {
 }
 const shG = { body: new THREE.BoxGeometry(2.6, 2, 5), cab: new THREE.BoxGeometry(2.4, 1.2, 2.2), stripe: new THREE.BoxGeometry(2.64, .35, 5.04) };
 function makeShuttle(s) {
-  const g = new THREE.Group(); const b = new THREE.Mesh(shG.body, mat('#ffffff')); b.position.y = 1.6; b.castShadow = true; g.add(b);
-  const cb = new THREE.Mesh(shG.cab, new THREE.MeshStandardMaterial({ color: '#6f93bb', roughness: .2 })); cb.position.set(0, 2.5, 1.0); g.add(cb);
-  const st = new THREE.Mesh(shG.stripe, mat('#3aa86b')); st.position.y = 1.1; g.add(st);
+  const sp = save.up.speed || 0, g = new THREE.Group(); const b = new THREE.Mesh(shG.body, mat(sp >= 3 ? '#f4efe2' : '#ffffff')); b.position.y = 1.6; b.castShadow = true; g.add(b);
+  const cb = new THREE.Mesh(shG.cab, new THREE.MeshStandardMaterial({ color: sp >= 2 ? '#3d5f8a' : '#6f93bb', roughness: .2 })); cb.position.set(0, 2.5, 1.0); g.add(cb);
+  const st = new THREE.Mesh(shG.stripe, mat(['#3aa86b', '#3b82c4', '#c9a85f', '#d4b469'][sp])); st.position.y = 1.1; g.add(st);
   for (const [x, z] of [[1.3, 1.6], [-1.3, 1.6], [1.3, -1.6], [-1.3, -1.6]]) { const wh = new THREE.Mesh(cG.wheel, mat('#222a33')); wh.scale.set(.7, .7, .7); wh.rotation.z = Math.PI / 2; wh.position.set(x, .55, z); g.add(wh); }
+  if (sp >= 1) for (const x of [-.9, .9]) { const hl = new THREE.Mesh(new THREE.BoxGeometry(.5, .3, .1), emat('#fff6c8', 1.6)); hl.position.set(x, 1.5, 2.53); g.add(hl); }
+  if (sp >= 2) { const lb = new THREE.Mesh(new THREE.BoxGeometry(1.9, .2, .5), emat('#4ac1ff', 1.6)); lb.position.set(0, 3.2, 1.2); g.add(lb); const sk = new THREE.Mesh(new THREE.BoxGeometry(2.7, .3, 5.1), mat('#26406b')); sk.position.y = .8; g.add(sk); }
+  if (sp >= 3) { const ug = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 6.4), new THREE.MeshBasicMaterial({ color: '#4ac1ff', transparent: true, opacity: .55, depthWrite: false })); ug.rotation.x = -Math.PI / 2; ug.position.y = .12; g.add(ug); const wg = new THREE.Mesh(new THREE.BoxGeometry(2.6, .15, .8), mat('#c9a85f')); wg.position.set(0, 3.2, -2.3); g.add(wg); const an = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, 1.4, 4), mat('#c9a85f')); an.position.set(.9, 3.9, -1.5); g.add(an); }
+  if (sp >= 1) { const dia = new THREE.Mesh(new THREE.OctahedronGeometry(.8 + sp * .2), emat(['', '#6c93bf', '#4a8ae0', '#e6bf2f'][sp], 1.4)); dia.position.y = 6.5; g.add(dia); g.userData.dia = dia; } // tier marker, readable from far away
+  if (sp >= 2) { const rg = new THREE.Mesh(new THREE.RingGeometry(3.6, 4.4, 28), new THREE.MeshBasicMaterial({ color: sp >= 3 ? '#ffd45a' : '#4a8ae0', transparent: true, opacity: .65, side: THREE.DoubleSide, depthWrite: false })); rg.rotation.x = -Math.PI / 2; rg.position.y = .2; g.add(rg); }
   world.add(g); return g;
 }
+function rebuildShuttleMeshes() { veh.shuttles.forEach(m => world.remove(m)); veh.shuttles = []; }
+function rebuildMarshalMeshes() { veh.marsh.forEach(m => world.remove(m)); veh.marsh = []; }
 const marG = new THREE.ConeGeometry(1.5, 3.4, 10);
-function makeMarshal() { const g = new THREE.Group(); const c = new THREE.Mesh(marG, mat('#f0c419')); c.position.y = 1.7; c.castShadow = true; g.add(c); const hd = new THREE.Mesh(headG, mat('#f0cfb0')); hd.position.y = 4; g.add(hd); const bar = new THREE.Mesh(new THREE.BoxGeometry(2.6, .5, 2.6), mat('#ffffff')); bar.position.y = 1.9; g.add(bar); const ring = new THREE.Mesh(new THREE.RingGeometry(38, 40, 48), new THREE.MeshBasicMaterial({ color: '#f0c419', transparent: true, opacity: .45, side: THREE.DoubleSide })); ring.rotation.x = -Math.PI / 2; ring.position.y = .5; g.add(ring); world.add(g); return g; }
+function makeMarshal() {
+  const mt = save.up.marsh || 0, g = new THREE.Group(); const c = new THREE.Mesh(marG, mat(mt >= 3 ? '#e8b923' : '#f0c419')); c.position.y = 1.7; c.castShadow = true; g.add(c); const hd = new THREE.Mesh(SG.head, mat('#f0cfb0')); hd.position.y = 4; g.add(hd); const bar = new THREE.Mesh(new THREE.BoxGeometry(2.6, .5, 2.6), mat('#ffffff')); bar.position.y = 1.9; g.add(bar);
+  if (mt >= 1) { const hv = new THREE.Mesh(new THREE.BoxGeometry(2.9, .9, 2.9), emat('#ff8a1f', .5)); hv.position.y = 2.7; g.add(hv); }
+  if (mt >= 1) { const pole = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, 3.4, 5), mat('#cfd6df')); pole.position.set(0, 5.5, 0); g.add(pole); const fl = new THREE.Mesh(new THREE.BoxGeometry(2.1, 1.1, .1), mat(['', '#6c93bf', '#2b5aa0', '#d4b469'][mt])); fl.position.set(1.1, 6.6, 0); g.add(fl); }
+  const ring = new THREE.Mesh(new THREE.RingGeometry(38, 40, 48), new THREE.MeshBasicMaterial({ color: mt >= 3 ? '#d4b469' : '#f0c419', transparent: true, opacity: .45, side: THREE.DoubleSide })); ring.rotation.x = -Math.PI / 2; ring.position.y = .5; g.add(ring); g.userData.ring = ring; world.add(g); return g;
+}
 function buildVehicles() {
   [...veh.coaches, ...veh.shuttles, ...veh.marsh].forEach(m => world.remove(m)); veh.coaches = COACHES.map(makeCoach); veh.shuttles = SHUTTLES.map(makeShuttle); veh.marsh = [];
 }
 function updVehicles(time) {
   COACHES.forEach((c, i) => { const m = veh.coaches[i]; if (!m) return; const vis = !['sched', 'gone'].includes(c.st); m.visible = vis; if (vis) { m.position.set(c.x, 0, c.z); m.rotation.y = c.ang; } if (c.st === 'broken') m.position.y = Math.sin(time * 14) * .05; });
   while (veh.shuttles.length < SHUTTLES.length) veh.shuttles.push(makeShuttle(SHUTTLES[veh.shuttles.length]));
-  SHUTTLES.forEach((s, i) => { const m = veh.shuttles[i]; m.position.set(s.x, 0, s.z); m.rotation.y = s.ang; m.visible = true; });
+  SHUTTLES.forEach((s, i) => { const m = veh.shuttles[i]; m.position.set(s.x, 0, s.z); m.rotation.y = s.ang; m.visible = true; if (m.userData.dia) { m.userData.dia.rotation.y = time * 2.4; m.userData.dia.rotation.x = Math.sin(time * 3) * .15; } });
   while (veh.marsh.length < S.marshals.length) veh.marsh.push(makeMarshal());
-  veh.marsh.forEach((m, i) => { const n = S.marshals[i]; m.visible = n != null; if (n != null) m.position.set(GN[n].x, 0, GN[n].z); });
+  veh.marsh.forEach((m, i) => { const n = S.marshals[i]; m.visible = n != null; if (n != null) m.position.set(GN[n].x, 0, GN[n].z); if (m.userData.ring) m.userData.ring.scale.setScalar(marshalR() / 40); });
 }
 
 /* ---- bay decals & selection ring ---- */
